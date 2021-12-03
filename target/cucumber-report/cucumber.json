@@ -1,0 +1,164 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2021-11-05T11:23:40.899Z",
+        "line": 18,
+        "name": "Check whether system throws \"Please select above first\" if we search item without selecting customer",
+        "description": "",
+        "id": "createquotation;check-whether-system-throws-\"please-select-above-first\"-if-we-search-item-without-selecting-customer",
+        "after": [
+          {
+            "result": {
+              "duration": 7000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.embedScreenshot(io.cucumber.java.Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 3389000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.quitDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 23101000000,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "User is on login page",
+            "match": {
+              "location": "stepDefinitions.Steps.user_is_on_login_page()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 5481000000,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "User enters email as \"testra.j409@gmail.com\" and password as \"Cbsinf0.\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"testra.j409@gmail.com\"",
+                  "offset": 21
+                },
+                {
+                  "val": "\"Cbsinf0.\"",
+                  "offset": 61
+                }
+              ],
+              "location": "stepDefinitions.Steps.user_enters_email_as_and_password_as(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 7152000000,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "User clicks login button",
+            "match": {
+              "location": "stepDefinitions.Steps.user_clicks_login_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 787000000,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "User clicks sales from side menu",
+            "match": {
+              "location": "stepDefinitions.DashboardPageSteps.user_clicks_sales_from_side_menu()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2519000000,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "User clicks quotations from side menu",
+            "match": {
+              "location": "stepDefinitions.DashboardPageSteps.user_clicks_quotations_from_side_menu()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3133000000,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "User clicks New Quotation button",
+            "match": {
+              "location": "stepDefinitions.QuotationListPageSteps.user_clicks_new_quotation_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3866000000,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "User selects items",
+            "match": {
+              "location": "stepDefinitions.CreateQuotationPageSteps.user_selects_items()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 67000000,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "Alert is thrown \"Please select above first\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Please select above first\"",
+                  "offset": 16
+                }
+              ],
+              "location": "stepDefinitions.CreateQuotationPageSteps.alert_is_thrown(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression"
+          },
+          {
+            "name": "@Test"
+          }
+        ]
+      }
+    ],
+    "name": "CreateQuotation",
+    "description": "",
+    "id": "createquotation",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/Features/CreateQuotation.feature",
+    "tags": []
+  }
+]

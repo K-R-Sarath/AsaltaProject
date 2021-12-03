@@ -1,0 +1,6 @@
+stepDefinitions\DashboardPageSteps.class
+stepDefinitions\Hooks.class
+testRunner\TestRunner.class
+stepDefinitions\Steps.class
+stepDefinitions\InvoiceListPageSteps.class
+stepDefinitions\InvoiceCreationPageSteps.class

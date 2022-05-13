@@ -69,6 +69,22 @@ public class Elements {
 		return kywdResult;
 	}
 	
+	public static Map<Boolean, String> ERASEVALUE(WebDriver driver, WebElement element)	{
+		Map<Boolean,String> kywdResult = new HashMap<Boolean,String>();
+		try	{
+			Validations.VERIFYOBJECT(driver, element);
+			element.click();
+			element.sendKeys(Keys.CONTROL+"A");
+			element.sendKeys(Keys.BACK_SPACE);
+			Thread.sleep(1000);
+			kywdResult.put(true, "Value Erased");
+		} catch (Exception e) {
+			kywdResult.put(false, e.toString());
+		} 
+		return kywdResult;
+		
+	}
+	
 	public static Map<Boolean, String> CTRLAWITHDELETE(WebDriver driver, WebElement element) {
 		Map<Boolean,String> kywdResult = new HashMap<Boolean,String>();
 		try {

@@ -57,7 +57,14 @@ public class CreateQuotationPageSteps {
 	    }
 	}
 
-
+	@When("User enter Quantity as {string}")
+	public void user_enter_quantity_as(String Qty) throws Exception {
+	    Map<Boolean,String> status = createQuotation.enterQuantity(Qty);
+	    Assert.assertTrue(status.get(false),status.containsKey(true));
+	    Thread.sleep(10000);
+	    Map<Boolean,String> status1 = createQuotation.clickOutside();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
 
 
 

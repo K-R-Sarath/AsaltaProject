@@ -35,7 +35,7 @@ Examples:
 	|	abcd	|
 	
 @Regression 
-Scenario Outline: Check whether system throws error while entering more than 100% in discount
+Scenario Outline: Check whether system throws error while entering more than 100% and less than 0% in discount
 	Given User is on login page
 	When User enters email as "testra.j409@gmail.com" and password as "Cbsinf0."
 	And User clicks login button
@@ -51,6 +51,7 @@ Scenario Outline: Check whether system throws error while entering more than 100
 Examples:
 	|	Discounts	|	Result	|
 	|	101%		|	Discount cannot be more than 100%	|
+	|	-1%			|	Discount cannot be less than 0%		|
 	
 @Regression
 Scenario: Check whether system throws error while entering discount amount greater than total amount	

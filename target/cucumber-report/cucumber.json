@@ -3,40 +3,18 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2021-11-05T11:23:40.899Z",
-        "line": 18,
-        "name": "Check whether system throws \"Please select above first\" if we search item without selecting customer",
+        "line": 3,
+        "name": "Login and navigate to new invoice sale page",
         "description": "",
-        "id": "createquotation;check-whether-system-throws-\"please-select-above-first\"-if-we-search-item-without-selecting-customer",
-        "after": [
-          {
-            "result": {
-              "duration": 7000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "stepDefinitions.Hooks.embedScreenshot(io.cucumber.java.Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 3389000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "stepDefinitions.Hooks.quitDriver()"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
+        "type": "background",
+        "keyword": "Background",
         "steps": [
           {
             "result": {
-              "duration": 23101000000,
+              "duration": 12349000000,
               "status": "passed"
             },
-            "line": 19,
+            "line": 4,
             "name": "User is on login page",
             "match": {
               "location": "stepDefinitions.Steps.user_is_on_login_page()"
@@ -45,10 +23,10 @@
           },
           {
             "result": {
-              "duration": 5481000000,
+              "duration": 4745000000,
               "status": "passed"
             },
-            "line": 20,
+            "line": 5,
             "name": "User enters email as \"testra.j409@gmail.com\" and password as \"Cbsinf0.\"",
             "match": {
               "arguments": [
@@ -67,10 +45,10 @@
           },
           {
             "result": {
-              "duration": 7152000000,
+              "duration": 3966000000,
               "status": "passed"
             },
-            "line": 21,
+            "line": 6,
             "name": "User clicks login button",
             "match": {
               "location": "stepDefinitions.Steps.user_clicks_login_button()"
@@ -79,67 +57,128 @@
           },
           {
             "result": {
-              "duration": 787000000,
+              "duration": 1440000000,
               "status": "passed"
             },
-            "line": 22,
-            "name": "User clicks sales from side menu",
+            "line": 7,
+            "name": "User is on Dashboard page and clicks sales and invoice from side menu",
             "match": {
-              "location": "stepDefinitions.DashboardPageSteps.user_clicks_sales_from_side_menu()"
+              "location": "stepDefinitions.DashboardPageSteps.user_is_on_dashboard_page()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 2519000000,
+              "duration": 14000000,
               "status": "passed"
             },
-            "line": 23,
-            "name": "User clicks quotations from side menu",
+            "line": 8,
+            "name": "User navigates to invoice sale",
             "match": {
-              "location": "stepDefinitions.DashboardPageSteps.user_clicks_quotations_from_side_menu()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_navigates_to_invoice_sale()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 3133000000,
+              "duration": 2103000000,
               "status": "passed"
             },
-            "line": 24,
-            "name": "User clicks New Quotation button",
+            "line": 9,
+            "name": "User clicks New Invoice Sale button",
             "match": {
-              "location": "stepDefinitions.QuotationListPageSteps.user_clicks_new_quotation_button()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_new_invoice_sale_button()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2022-05-13T11:50:35.879Z",
+        "line": 273,
+        "name": "Check whether user can close edit billing address popup",
+        "description": "",
+        "id": "createinvoice;check-whether-user-can-close-edit-billing-address-popup",
+        "after": [
+          {
+            "result": {
+              "duration": 3000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.embedScreenshot(io.cucumber.java.Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 1685000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.quitDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3472000000,
+              "status": "passed"
+            },
+            "line": 274,
+            "name": "User selects customer",
+            "match": {
+              "location": "stepDefinitions.InvoiceCreationPageSteps.user_selects_customer()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 3866000000,
+              "duration": 3442000000,
               "status": "passed"
             },
-            "line": 25,
-            "name": "User selects items",
+            "line": 275,
+            "name": "User selects billing address",
             "match": {
-              "location": "stepDefinitions.CreateQuotationPageSteps.user_selects_items()"
+              "location": "stepDefinitions.InvoiceCreationPageSteps.user_selects_billing_address()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 67000000,
+              "duration": 403000000,
               "status": "passed"
             },
-            "line": 26,
-            "name": "Alert is thrown \"Please select above first\"",
+            "line": 276,
+            "name": "User clicks edit option",
             "match": {
-              "arguments": [
-                {
-                  "val": "\"Please select above first\"",
-                  "offset": 16
-                }
-              ],
-              "location": "stepDefinitions.CreateQuotationPageSteps.alert_is_thrown(java.lang.String)"
+              "location": "stepDefinitions.InvoiceCreationPageSteps.user_clicks_edit_option()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 382000000,
+              "status": "passed"
+            },
+            "line": 277,
+            "name": "User closes billing address popup",
+            "match": {
+              "location": "stepDefinitions.InvoiceCreationPageSteps.user_closes_billing_address_popup()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 31077000000,
+              "status": "passed"
+            },
+            "line": 278,
+            "name": "Verify popup closed",
+            "match": {
+              "location": "stepDefinitions.InvoiceCreationPageSteps.verify_popup_closed()"
             },
             "keyword": "Then "
           }
@@ -154,11 +193,11 @@
         ]
       }
     ],
-    "name": "CreateQuotation",
+    "name": "CreateInvoice",
     "description": "",
-    "id": "createquotation",
+    "id": "createinvoice",
     "keyword": "Feature",
-    "uri": "file:src/test/resources/Features/CreateQuotation.feature",
+    "uri": "file:src/test/resources/Features/CreateInvoice.feature",
     "tags": []
   }
 ]

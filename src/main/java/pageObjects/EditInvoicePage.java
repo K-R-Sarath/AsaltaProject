@@ -37,7 +37,7 @@ public class EditInvoicePage {
 	@FindBy(how = How.ID, using="sldiscount")
 	private WebElement discount;
 	
-	@FindBy(how = How.XPATH, using="//label[@for='sldiscount']")
+	@FindBy(how = How.XPATH, using="//table[@id='slTable']//thead//tr//th[6]")
 	private WebElement clickOutOfDisc;
 	
 	@FindBy(how = How.XPATH, using="//tr[@id='tfoot']//th[@class='text-right']")
@@ -131,13 +131,21 @@ public class EditInvoicePage {
 	
 	public Long amount()	{
 		long amount;
+		long add = 0; 
 		String amt = getAmount().get(true);
+		StringBuilder builder = new StringBuilder();
+		if(amt.contains(","))
+		{
 		String[] retval = amt.split(",");
-	    StringBuilder builder = new StringBuilder();
 	    for(String a:retval) {
 	    	builder.append(a);
 	    }
-	    long add = Long.parseLong(builder.toString());
+	    	add = Long.parseLong(builder.toString());
+		}else{
+			builder.append(amt);
+			add = Long.parseLong(builder.toString());
+		}
+	    
 	    amount = add + 1;
 		return amount;
 	}

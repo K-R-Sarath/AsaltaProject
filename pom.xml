@@ -112,7 +112,7 @@
 	<artifactId>tools</artifactId>
 	<version>1.7</version>
 	<scope>system</scope>
-	<systemPath>C:\Program Files\Java\jdk1.8.0_311\lib\tools.jar</systemPath>
+	<systemPath>C:\Program Files\Java\jdk1.8.0_331\lib\tools.jar</systemPath>
 </dependency>
 <dependency>
   <groupId>de.monochromata.cucumber</groupId>

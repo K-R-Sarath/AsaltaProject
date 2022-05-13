@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -40,6 +41,12 @@ public class CreateQuotationPage {
 	
 	@FindBy(how = How.XPATH, using="//div[@class='bootbox-body']")
 	private WebElement message;
+	
+	@FindBy(how = How.NAME, using="quantity[]")
+	private WebElement quantity;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='quTable']//thead/tr/th")
+	private List<WebElement> clickOut;
 	
 	
 	public Map<Boolean,String> clickCustomer()	{
@@ -86,5 +93,26 @@ public class CreateQuotationPage {
 		String msg = message.getText();
 		return msg;
 	}
+	
+	public Map<Boolean,String> enterQuantity(String Quantity)	{
+		
+		return Elements.ENTERVALUE1(driver, quantity, Quantity);
+	
+	}
+	
+	public Map<Boolean,String> clickOutside()	{
+		
+		Map<Boolean,String> clickOutside = null;
+		
+		for(int i=0;i<clickOut.size();i++)	{
+			if(i==5) {
+				WebElement element = clickOut.get(i);
+				clickOutside = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return clickOutside;
+	}
+	
 
 }

@@ -57,5 +57,16 @@ public class Validations {
 		}
 		return kywdResult;
 	}
+	
+	public static boolean IFELEMENTENABLED(WebElement element)	{
+		boolean kywdResult = false;
+		try	{
+			element.isEnabled();
+			kywdResult = true;
+		} catch	(NoSuchElementException e)	{
+			kywdResult = false;
+		}
+		return kywdResult;
+	}
 
 }

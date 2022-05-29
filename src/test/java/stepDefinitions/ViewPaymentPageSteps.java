@@ -46,9 +46,6 @@ public class ViewPaymentPageSteps {
 	    }else {
 	    	Assert.assertTrue(false);
 	    }
-	    Thread.sleep(2000);	
-	    Map<Boolean,String> status = viewPayments.close();
-	    Assert.assertTrue(status.get(false),status.containsKey(true));
 	}
 
 	@Then("User deletes the payment")

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import commonMethods.Elements;
+import commonMethods.Validations;
 
 public class DashboardPage {
 	
@@ -30,6 +31,21 @@ public class DashboardPage {
 	
 	@FindBy(how = How.XPATH, using = "//div[@id='sidebar_menu']//ul//li[@id='mm_deliveries']//a")
 	private WebElement clickDeliveriesInSideMenu;
+	
+	@FindBy(how = How.XPATH, using="//a[@data-title='Dashboard Widgets']")
+	private WebElement dashboardWidgetIcon;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='sidebar_menu']//ul//li[@class='mm_products mm_bundleproduct vv_warehouses mm_pricebook']")
+	private WebElement clickInventoryInSideMenu;
+	
+	@FindBy(how = How.ID, using="products_index")
+	private WebElement clickItems;
+	
+	@FindBy(how = How.ID, using="dtFilter-filter--PRData-4")
+	private WebElement searchItem;
+	
+	
+	
 	
 	public Map<Boolean,String> clickSalesInSideMenu() {
 
@@ -54,6 +70,26 @@ public class DashboardPage {
 		return Elements.CLICK(driver, clickQuotations);
 		
 	}
+	
+	public boolean verifyDashboard()	{
+		
+		return Validations.IFELEMENTPRESENT(dashboardWidgetIcon);
+		
+	}
+	
+	public Map<Boolean,String> clickInventoryInSideMenu()	{
+		
+		return Elements.CLICK(driver, clickInventoryInSideMenu);
+		
+	}
+	
+	public Map<Boolean,String> clickItems()	{
+		
+		return Elements.CLICK(driver, clickItems);
+		
+	}
+	
+	
 	
 	
 

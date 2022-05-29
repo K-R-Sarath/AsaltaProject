@@ -25,7 +25,6 @@ public class InvoiceCreationPageSteps {
 	   Assert.assertTrue(status.get(false),status.containsKey(true));
 	   Map<Boolean,String> status1 = invoiceCreation.enterCustomerName();
 	   Assert.assertTrue(status1.get(false),status1.containsKey(true));
-	   Thread.sleep(50000);
 	   Map<Boolean,String> status2 = invoiceCreation.selectCustomer();
 	   Assert.assertTrue(status2.get(false),status2.containsKey(true));
 	   invoiceCreation.scroll();
@@ -180,7 +179,7 @@ public class InvoiceCreationPageSteps {
 
 	//Check whether system throws "Discount amount cannot be more than item amount" when we enter discount amount more than the item amount and "Discount amount cannot be more than 100%" if we enter percentage above hundred
 
-	@When("User enters discount {string}")
+	/*@When("User enters discount {string}")
 	public void user_enters_discount(String discount) {
 		Map<Boolean,String> status = invoiceCreation.enterDiscount(discount);
 		Assert.assertTrue(status.get(false),status.containsKey(true));
@@ -197,7 +196,7 @@ public class InvoiceCreationPageSteps {
 			Assert.assertTrue(false);
 		}
 	   
-	}
+	}*/
 	
 	//Check whether user is able to upload document	
 	
@@ -508,6 +507,602 @@ public class InvoiceCreationPageSteps {
 	    Assert.assertTrue(status.get(false), status.containsKey(true));
 	}
 
+	//Check whether system throws "Customer is missing from invoice" when user clicks save address button in add shipping address option without selecting customer	
+	
+	@When("User clicks add shipping address button")
+	public void user_clicks_add_shipping_address_button() {
+	    Map<Boolean,String> status = invoiceCreation.clickAddShippingAddress();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether system throws "Address updated successfully" after editing shipping address inside new invoice sale page
+	
+	@When("User selects shipping address")
+	public void user_selects_shipping_address() {
+		 Map<Boolean,String> status = invoiceCreation.clickShippingAddress();
+		 Assert.assertTrue(status.get(false), status.containsKey(true));
+		 Map<Boolean,String> status1 = invoiceCreation.enterShipAddress();
+		 Assert.assertTrue(status1.get(false), status1.containsKey(true));
+		 Map<Boolean,String> status2 = invoiceCreation.selectShipAddress();
+		 Assert.assertTrue(status2.get(false), status2.containsKey(true));
+	}
+	
+	@When("User clicks edit option shipping")
+	public void user_clicks_edit_option_shipping() throws Exception {
+		Map<Boolean,String> status = invoiceCreation.clickEditShipAddress();
+		Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether system throws alert when user clicks save currency button in add currency option inside new invoice sale page without filling anything
+
+	@When("User clicks add currency button")
+	public void user_clicks_add_currency_button() {
+	    Map<Boolean,String> status = invoiceCreation.clickAddCurrencyButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks save currency button")
+	public void user_clicks_save_currency_button() {
+	    Map<Boolean,String> status = invoiceCreation.clickSaveCurrency();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Four alerts, First alert is {string}")
+	public void four_alerts_first_alert_is(String msg1) {
+	   String alert = invoiceCreation.alertMessage1();
+	   if(alert.equals(msg1)){
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+	
+	@Then("Second alert is {string}")
+	public void second_alert_is(String msg2) {
+	   String alert = invoiceCreation.alertMessage2();
+	   if(alert.equals(msg2)){
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+	
+	@Then("Third alert is {string}")
+	public void third_alert_is(String msg3) {
+	   String alert = invoiceCreation.alertMessage3();
+	   if(alert.equals(msg3)){
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+	
+	@Then("Fourth alert is {string}")
+	public void fourth_alert_is(String msg4) {
+	    String alert = invoiceCreation.alertMessage4();
+	    if(alert.equals(msg4)){
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether system throws "The Exchange Rate field is required." when clicking save currency button with exchange rate "0.00"
+	
+	@When("User selects currency code")
+	public void user_selects_currency_code() {
+	    Map<Boolean,String> status = invoiceCreation.clickCurrencyCode();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Map<Boolean,String> status1 = invoiceCreation.enterCurrencyCode();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Map<Boolean,String> status2 = invoiceCreation.selectCurrencyCode();
+	    Assert.assertTrue(status2.get(false), status2.containsKey(true));
+	}
+
+	//Check whether system throws "Currency successfully added"	after creating currency
+
+	@When("User enters exchange rate")
+	public void user_enters_exchange_rate() {
+		Map<Boolean,String> status = invoiceCreation.eraseRate();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Map<Boolean,String> status1 = invoiceCreation.enterExchangeRate();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	//
+	
+	@When("User closes the currency popup")
+	public void user_closes_the_currency_popup() {
+		Map<Boolean,String> status = invoiceCreation.clickCurrencyPopupClose();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify popup closes")
+	public void verify_popup_closes() throws Exception {
+		Thread.sleep(1000);
+		boolean status = invoiceCreation.verifyCurrencyPopupClosed();
+		System.out.println(status);
+		if(status == false) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether the page gets resets after clicking reset button
+	
+	@When("User clicks reset button")
+	public void user_clicks_reset_button() {
+		Map<Boolean,String> status = invoiceCreation.clicksResetButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks OK")
+	public void user_clicks_ok() {
+		Map<Boolean,String> status = invoiceCreation.clickOKinReset();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify whether the page gets resetted")
+	public void verify_whether_the_page_gets_resetted() {
+	   String status = invoiceCreation.afterReset();
+	   if(status.equals("Select Customer")){
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+	
+	@When("Scroll up to customer field")
+	public void scroll_up_to_customer_field() {
+	    invoiceCreation.scroll4();
+	}
+
+	//Check whether reset popup disappears after clicking cancel
+	
+	@When("User clicks cancel")
+	public void user_clicks_cancel() {
+		Map<Boolean,String> status = invoiceCreation.clickCancelinReset();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify whether popup closed")
+	public void verify_whether_popup_closed() throws Exception {
+		Thread.sleep(1000);
+		boolean status = invoiceCreation.verifyResetPopupDisappears();
+		System.out.println(status);
+		if(status == false) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether reset popup closes after clicking close
+	
+	@When("User closes the popup")
+	public void user_closes_the_popup() {
+		Map<Boolean,String> status = invoiceCreation.resetPopupClose();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify the same")
+	public void verify_the_same() throws Exception {
+		Thread.sleep(1000);
+		boolean status = invoiceCreation.verifyResetPopupCloses();
+		System.out.println(status);
+		if(status == false) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether invoice status is due in invoice list page when sale status is saved as completed
+	
+	@When("User selects sale status as completed")
+	public void user_selects_sale_status_as_completed() {
+		Map<Boolean,String> status = invoiceCreation.clickSaleStatus();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+		Map<Boolean,String> status1 = invoiceCreation.selectSaleStatusCompleted();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+
+	//Check whether invoice status is due in invoice list page when sale status is saved as processing
+	
+	@When("User selects sale status as processing")
+	public void user_selects_sale_status_as_processing() {
+		Map<Boolean,String> status = invoiceCreation.clickSaleStatus();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+		Map<Boolean,String> status1 = invoiceCreation.selectSaleStatusProcessing();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+
+	//Check whether invoice status is pending in invoice list page when sale status is saved as pending
+	
+	@When("User selects sale status as pending")
+	public void user_selects_sale_status_as_pending() {
+		Map<Boolean,String> status = invoiceCreation.clickSaleStatus();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+		Map<Boolean,String> status1 = invoiceCreation.selectSaleStatusPending();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+
+	//Check whether invoice status is cancelled in invoice list page when sale status is saved as cancelled
+	
+	@When("User selects sale status as cancelled")
+	public void user_selects_sale_status_as_cancelled() {
+		Map<Boolean,String> status = invoiceCreation.clickSaleStatus();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+		Map<Boolean,String> status1 = invoiceCreation.selectSaleStatusCancelled();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	//Check whether clicking invoice sales in breadcrumbs navigates to invoice list page
+	
+	@When("User clicks invoice sales breadcrumb")
+	public void user_clicks_invoice_sales_breadcrumb() {
+		Map<Boolean,String> status = invoiceCreation.clickInvoiceSalesBreadcrumb();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether clicking dashboard in breadcrumbs navigates to dashboard page
+	
+	@When("User clicks dashboard breadcrumb")
+	public void user_clicks_dashboard_breadcrumb() {
+		Map<Boolean,String> status = invoiceCreation.clickDashboardBreadcrumb();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether adding GST@7% affects the total amount 
+
+	@When("User chooses GST option")
+	public void user_chooses_gst_option() {
+		Map<Boolean,String> status = invoiceCreation.clickGSTField();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Map<Boolean,String> status1 = invoiceCreation.selectGSToption();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Total amount should be affected")
+	public void total_amount_should_be_affected() {
+		if((String.valueOf(invoiceCreation.amountFor7PercentGST())).equalsIgnoreCase(String.valueOf(invoiceCreation.totalAmt()))) {
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether Upcoming invoice date is displaying correctly for repeat every month option with ends never
+	
+	@When("Scroll down to recurring button")
+	public void scroll_down_to_recurring_button() {
+	    invoiceCreation.scroll7();
+	}
+	
+	@When("Enable recurring button")
+	public void enable_recurring_button() {
+		Map<Boolean,String> status = invoiceCreation.clickRecurringEnableDisableButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Upcoming invoice date should be correctly displayed")
+	public void upcoming_invoice_date_should_be_correctly_displayed() {
+	    if((invoiceCreation.upcomingInvDate()).equalsIgnoreCase((invoiceCreation.getNewDate()))) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether Upcoming invoice date is displaying correctly for repeat every year option with ends never
+	
+	@When("Choose Repeats Every option as Year")
+	public void choose_repeats_every_option_as_year() {
+		Map<Boolean,String> status = invoiceCreation.clickRepeatField();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Map<Boolean,String> status1 = invoiceCreation.chooseYearInRepeatOption();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Upcoming invoice date for year option should be correctly displayed")
+	public void upcoming_invoice_date_for_year_option_should_be_correctly_displayed() {
+		if((invoiceCreation.upcomingInvDate()).equalsIgnoreCase((invoiceCreation.getNewDateForYearOption()))) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether Upcoming invoice date is displaying correctly for repeat every month option with ends after
+	
+	@When("Choose After in Ends option")
+	public void choose_after_in_ends_option() {
+		Map<Boolean,String> status = invoiceCreation.chooseAfterInEndsOption();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Upcoming invoice date and end date should be correctly displayed")
+	public void upcoming_invoice_date_and_end_date_should_be_correctly_displayed() {
+	   if((invoiceCreation.getNewDate()).equalsIgnoreCase((invoiceCreation.upcomingEndDate())))	{
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+
+	//Check whether upcoming invoice date and end date is displaying correctly for repeat every year option with ends after
+	
+	@Then("Upcoming invoice date and end date for year option should be correctly displayed")
+	public void upcoming_invoice_date_and_end_date_for_year_option_should_be_correctly_displayed() {
+	    if((invoiceCreation.upcomingEndDate()).equalsIgnoreCase((invoiceCreation.getNewDateForYearOption())))	{
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+	
+	//Check whether entering decimal value in repeat times field and occurence field throws error message
+	
+	@When("Enter decimal value in repeat times field")
+	public void enter_decimal_value_in_repeat_times_field() {
+		Map<Boolean,String> status = invoiceCreation.enterRepeatTimes();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Error throws {string}")
+	public void error_throws(String msg) {
+	    String alert = invoiceCreation.alertForRepeatTimes();
+	    if(alert.equalsIgnoreCase(msg))	{
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+	
+	@When("Enter decimal value in occurence field")
+	public void enter_decimal_value_in_occurence_field() {
+		Map<Boolean,String> status = invoiceCreation.enterOccurence();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Error throwss {string}")
+	public void error_throwss(String msg) {
+	    String alert = invoiceCreation.alertForOccurence();
+	    if(alert.equalsIgnoreCase(msg))	{
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether system throws "Unexpected value provided!" while entering negative values, Zero and alphabets in Quantity field while editing item after adding it
+	
+	@When("User clicks item edit button")
+	public void user_clicks_item_edit_button() {
+		Map<Boolean,String> status = invoiceCreation.clickEditAfterAddingItem();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User enters Quantity in edit option {string}")
+	public void user_enters_quantity_in_edit_option(String Qty) {
+		Map<Boolean,String> status = invoiceCreation.editQuantityInEditItem(Qty);
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks out of Quantity field")
+	public void user_clicks_out_of_quantity_field() {
+		Map<Boolean,String> status = invoiceCreation.clickOutOfQuantityField();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether system throws error while entering more than 100% and less than 0% in discount in item edit
+	
+	@When("Discount is {string}")
+	public void discount_is(String discount) {
+		Map<Boolean,String> status = invoiceCreation.enterDiscountInItemEdit(discount);
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks submit button")
+	public void user_clicks_submit_button() {
+		Map<Boolean,String> status = invoiceCreation.clickSubmit();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether system throws error while entering discount amount greater than total amount in item edit
+	
+	@When("Discount greater than net unit price")
+	public void discount_greater_than_net_unit_price() {
+		Map<Boolean,String> status = invoiceCreation.enterDiscountinEdit();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether user can close edit item popup
+	
+	@When("User closes popup")
+	public void user_closes_popup() {
+		Map<Boolean,String> status = invoiceCreation.closeItemEditPopup();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify the popup close")
+	public void verify_the_popup_close() {
+	    boolean status = invoiceCreation.VerifyThePopupClose();
+	    if(status)	{
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether system throws "Select Orders" if we click Select order button in consolidated orders popup by choosing Consignment location without selecting orders
+	
+	@When("Choose location as consignment")
+	public void choose_location_as_consignment() {
+		Map<Boolean,String> status = invoiceCreation.clickLocation();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Map<Boolean,String> status1 = invoiceCreation.chooseLocation();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@When("User clicks Select consolidated orders button")
+	public void user_clicks_select_consolidated_orders_button() {
+		Map<Boolean,String> status = invoiceCreation.clickConsolidatedOrdersButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks select order button")
+	public void user_clicks_select_order_button() {
+		Map<Boolean,String> status = invoiceCreation.clickSelectOrdersButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether system throws "Please select above first" if we select order and click select order button without choosing customer in consolidated orders popup by choosing consignment location
+	
+	@When("Choose order")
+	public void choose_order() {
+		Map<Boolean,String> status = invoiceCreation.chooseConsolidatedOrder();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether order is added to order items table after selecting order in consolidated order popup and clicking select order button
+	
+	@Then("Order is added to order items table")
+	public void order_is_added_to_order_items_table() {
+	    boolean status = invoiceCreation.verifyOrderTable();
+	    if(status) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether clicking cancel button in consolidated orders popup closes the popup
+	
+	@When("User clicks cancel button in consolidated order popup")
+	public void user_clicks_cancel_button_in_consolidated_order_popup() {
+		Map<Boolean,String> status = invoiceCreation.clickCancelButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Verify it")
+	public void verify_it() throws Exception {
+		Thread.sleep(1000);
+	    boolean status = invoiceCreation.verifyConsolidatedOrderPopupClosed();
+	    if(status == false) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether user is able to close consolidated orders popup
+	
+	@When("User closes consolidated orders popup")
+	public void user_closes_consolidated_orders_popup() {
+		Map<Boolean,String> status = invoiceCreation.closeConsolidatedOrderPopup();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether system throws "Item SKU  and Item Name  is required." when clicking submit button in new item creation (Consignment location)
+	
+	@When("User scrolls down to new item button")
+	public void user_scrolls_down_to_new_item_button() {
+	    invoiceCreation.scroll8();
+	}
+	
+	@When("User clicks new item button")
+	public void user_clicks_new_item_button() {
+		Map<Boolean,String> status = invoiceCreation.clickNewItemButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks submit button in new item creation")
+	public void user_clicks_submit_button_in_new_item_creation() {
+		Map<Boolean,String> status = invoiceCreation.clickSubmitButtonForNewItem();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether user is able to quickly add new item
+	
+	@When("User enters SKU")
+	public void user_enters_sku() {
+		Map<Boolean,String> status = invoiceCreation.enterSKU();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User enters Item name")
+	public void user_enters_item_name() {
+		Map<Boolean,String> status = invoiceCreation.enterItemName();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("Item should be added to order items table")
+	public void item_should_be_added_to_order_items_table() throws Exception {
+		Thread.sleep(1000);
+	    boolean status = invoiceCreation.verifyOrderTable();
+	    if(status) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+	//Check whether user is able to close item add popup
+	
+	@When("User closed item add popup")
+	public void user_closed_item_add_popup() throws Exception {
+		Map<Boolean,String> status = invoiceCreation.closeAddItemPopup();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	//Check whether system throws "Unexpected value provided!" while entering negative values, Zero and alphabets in Quantity field in new item popup
+	
+	@When("User enters quantity {string}")
+	public void user_enters_quantity(String quantity) {
+		Map<Boolean,String> status = invoiceCreation.enterQty(quantity);
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User clicks outside the quantity field")
+	public void user_clicks_outside_the_quantity_field() {
+		Map<Boolean,String> status = invoiceCreation.clickOutQtyField();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether system throws error while entering more than 100% and less than 0% in discount in new item popup
+	
+	@When("User enters discount {string}")
+	public void user_enters_discount(String disc) {
+		Map<Boolean,String> status = invoiceCreation.enterDiscInNewItemPopup(disc);
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User enters unit price")
+	public void user_enters_unit_price() {
+		Map<Boolean,String> status = invoiceCreation.enterUnitPriceInNewItemPopup();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether user is able to create new item with discount percentage in new item popup
+	
+	@Then("Item should be added to order items table with discount")
+	public void item_should_be_added_to_order_items_table_with_discount() throws Exception {
+		Thread.sleep(1000);
+	    String status = invoiceCreation.verifyDiscAmountForNewItem();
+	    System.out.println(status);
+	    if(status.equalsIgnoreCase("0.00")) {
+	    	Assert.assertTrue(false);
+	    } else {
+	    	Assert.assertTrue(true);
+	    }
+	}
+
+
+
+
 
 
 
@@ -523,35 +1118,7 @@ public class InvoiceCreationPageSteps {
 
 
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
-
-
-
-
-
-
-
-
 
 
 

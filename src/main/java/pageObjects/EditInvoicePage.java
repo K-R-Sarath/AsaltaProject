@@ -55,11 +55,26 @@ public class EditInvoicePage {
 	@FindBy(how = How.ID, using="document")
 	private WebElement attachment;
 	
-	@FindBy(how = How.ID, using="select2-chosen-4")
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_slsale_status']//a//span[@class='select2-chosen']")
 	private WebElement saleStatusClick;
 	
 	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[4]")
 	private WebElement changeSaleStatusToCancelled;
+	
+	@FindBy(how = How.ID, using="slref")
+	private WebElement invoiceNO;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_revisions']//a//span[@class='select2-chosen']")
+	private WebElement revisionsField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li")
+	private List<WebElement> revisionsList;
+	
+	@FindBy(how = How.XPATH, using="//label[@for='apply_coupon']")
+	private WebElement clickOutOfRevisionsField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[1]")
+	private WebElement chooseRevision;
 	
 	public void scroll()	{
 		Scrolling.SCROLLINTOVIEW(driver, quantity);
@@ -216,6 +231,51 @@ public class EditInvoicePage {
 	public Map<Boolean,String> changeSaleStatus()	{
 		
 		return Elements.CLICK(driver, changeSaleStatusToCancelled);
+		
+	}
+	
+	public Map<Boolean,String> duplicateInvoiceNo()	{
+		
+		return Elements.ENTERVALUE(driver, invoiceNO, "SALE2022050688");
+		
+	}
+	
+	public void scroll4() {
+		
+		Scrolling.SCROLLINTOVIEW(driver, revisionsField);
+		
+	}
+	
+	public Map<Boolean,String> clickRevisionsField()	{
+		
+		return Elements.CLICK(driver, revisionsField);
+		
+	}
+	
+	public Integer getRevisionsList()	{
+		
+		System.out.println(revisionsList.size());
+		return revisionsList.size();
+		
+	}
+	
+	public Map<Boolean,String> selectRevision()	{
+		
+		return Elements.CLICK(driver, chooseRevision);
+		
+	}
+	
+	public Integer nowGetRevisionsList()	{
+		
+		System.out.println(revisionsList.size());
+		
+		return revisionsList.size();
+		
+	}
+	
+	public Map<Boolean,String> clickOutOfRevisionsField()	{
+		
+		return Elements.CLICK(driver, couponCode);
 		
 	}
 

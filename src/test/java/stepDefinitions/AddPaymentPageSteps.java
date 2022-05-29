@@ -195,6 +195,26 @@ public class AddPaymentPageSteps {
 	    Map<Boolean,String> status = addPayments.clickSavePaymentButton_Edit();
 	    Assert.assertTrue(status.get(false),status.containsKey(true));
 	}
+	
+	//Check whether system throws error "Please enter/select a value" while making amount field to zero in Add Payment
+
+	@When("User clicks date field twice to make calendar disappear")
+	public void user_clicks_date_field_twice_to_make_calendar_disappear() {
+		Map<Boolean,String> status = addPayments.clickDateField();
+	    Assert.assertTrue(status.get(false),status.containsKey(true)); 
+	}
+
+	@When("User clicks out of amount field")
+	public void user_clicks_out_of_amount_field() {
+		Map<Boolean,String> status = addPayments.clickOutAmountField();
+	    Assert.assertTrue(status.get(false),status.containsKey(true)); 
+	}
+
+
+
+
+
+
 
 
 

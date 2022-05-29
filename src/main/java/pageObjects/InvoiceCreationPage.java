@@ -1,8 +1,13 @@
 package pageObjects;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,13 +33,13 @@ public class InvoiceCreationPage {
 		this.driver = driver;
 	}
 	
-	@FindBy(how = How.XPATH, using = "//span[@id='select2-chosen-16']")
+	@FindBy(how = How.XPATH, using = "//div[@id='s2id_slcustomer']//a//span[@class='select2-chosen']")
 	private WebElement clickCustomerField;
 	
 	@FindBy(how = How.XPATH, using = "//div[@id='select2-drop']//div[@class='select2-search']//input")
 	private WebElement enterCustName;
 	
-	@FindBy(how = How.XPATH, using = "//ul[@id='select2-results-16']//li")
+	@FindBy(how = How.XPATH, using = "//ul[@class='select2-results']//li")
 	private List<WebElement> selectCust;
 	
 	@FindBy(how = How.ID, using = "search_items-selectized")
@@ -202,6 +207,189 @@ public class InvoiceCreationPage {
 	@FindBy(how = How.ID, using="formUpdateAddress")
 	private WebElement clickUpdateBillingAddressButton;
 	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_customer_shipping_address']//a")
+	private WebElement clickShippingAddressField;
+	
+	@FindBy(how = How.ID, using="shipAddress")
+	private WebElement editShippingAddress;
+	
+	@FindBy(how = How.NAME, using="add_currency")
+	private WebElement clickSaveCurrencyButton;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='toast-message']//p[1]")
+	private WebElement alertMsg8;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='toast-message']//p[2]")
+	private WebElement alertMsg9;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='toast-message']//p[3]")
+	private WebElement alertMsg10;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='toast-message']//p[4]")
+	private WebElement alertMsg11;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_code']//a")
+	private WebElement clickCurrencyCodeField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//div[@class='select2-search']//input")
+	private WebElement enterCurrencyCode;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul")
+	private WebElement selectCurrencyCode;
+	
+	@FindBy(how = How.ID, using="rate")
+	private WebElement exchangeRate;
+	
+	@FindBy(how = How.XPATH, using="//a//i[@class='fa fa-cog']")
+	private WebElement clickSettings;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='box-content']//div//div[5]//a")
+	private WebElement clickCurrencies;
+	
+	@FindBy(how = How.XPATH, using="//button//i[@class='fa fa-2x']")
+	private List<WebElement> closeCurrencyPopup;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='myModal']//div//div//div//button[@class='close']//i[@class='fa fa-2x']")
+	private WebElement verifyCurrencyPopupClosed;
+	
+	@FindBy(how = How.ID, using="reset")
+	private WebElement clickResetButton;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='modal-footer']//button[@data-bb-handler='confirm']")
+	private WebElement clickOKinResetPopup;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='modal-footer']//button[@data-bb-handler='cancel']")
+	private WebElement clickCancelinResetPopup;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_slcustomer']//a//span[@class='select2-chosen']")
+	private WebElement verifyAfterReset;
+	
+	@FindBy(how = How.XPATH, using = "//div[@id='s2id_slcustomer']//a//span[@class='select2-chosen']")
+	private WebElement scrollToCustField;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='modal-body']//button//i")
+	private WebElement resetPopupCloses;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_slsale_status']//a//span[@class='select2-chosen']")
+	private WebElement clickSaleStatusField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li")
+	private List<WebElement> saleStatus;
+	
+	@FindBy(how = How.XPATH, using="//ul[@class='breadcrumb']//li[2]//a")
+	private WebElement invoiceSalesBreadcrumb;
+	
+	@FindBy(how = How.XPATH, using="//ul[@class='breadcrumb']//li[1]")
+	private WebElement dashboardBreadcrumb;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_sltax2']//a//span[@class='select2-chosen']")
+	private WebElement clickGSTField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[1]")
+	private WebElement selectGSTAt7PercentOption;
+	
+	@FindBy(how = How.XPATH, using="//span[@class='gtotal form-control']")
+	private WebElement totalAmountForInvoice;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='col-md-12']//span[@class='recurring_invoice']//label[2]//div")
+	private WebElement recurringEnableDisableKey;
+	
+	@FindBy(how = How.XPATH, using="//label[@class='control-label']")
+	private WebElement upcomingInvoiceDate;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_repeat_every']//a//span[@class='select2-chosen']")
+	private WebElement clickRepeatOptionField;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[2]")
+	private WebElement chooseYearForRepeatOption;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='col-md-2']//div[2]")
+	private WebElement chooseAfterInEndsOption;
+	
+	@FindBy(how = How.ID, using="repeat_times")
+	private WebElement repeatTimes;
+	
+	@FindBy(how = How.ID, using="recurring_ends")
+	private WebElement endOccurence;
+	
+	@FindBy(how = How.XPATH, using="//small[contains(text(),'Please enter a valid number')]")
+	private List<WebElement> alertForRepeatTimesAndOccurence;
+	
+	@FindBy(how = How.XPATH, using="//i[@title='Edit']")
+	private WebElement clickEditItemAfterAddingItem;
+	
+	@FindBy(how = How.ID, using="pquantity")
+	private WebElement enterQuantityInEditOption;
+	
+	@FindBy(how = How.XPATH, using="//label[contains(text(),'Item GST')]")
+	private List<WebElement> clickOutOfQuantityField;
+	
+	@FindBy(how = How.ID, using="pdiscount")
+	private WebElement discountInItemEdit;
+	
+	@FindBy(how = How.ID, using="editItem")
+	private WebElement clickSubmitButton;
+	
+	@FindBy(how = How.ID, using="net_price")
+	private WebElement netUnitPrice;
+	
+	@FindBy(how = How.XPATH, using="//button[@class='close']//span//i")
+	private List<WebElement> closeItemEditPopup;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='s2id_slwarehouse']//a//span[@class='select2-chosen']")
+	private WebElement clickLocation;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[2]")
+	private WebElement chooseLocation;
+	
+	@FindBy(how = How.ID, using="select_consolidated_orders")
+	private WebElement clickConsolidatedOrdersButton;
+	
+	@FindBy(how = How.ID, using="select_orders")
+	private WebElement clickSelectOrdersButton;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='CompTable']//tbody//tr[2]//td//div")
+	private WebElement chooseOrder;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='slTable']//tbody[1]//tr")
+	private List<WebElement> orderTableItems;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='row']//div[@class='col-sm-12 text-center']//button[1]")
+	private WebElement cancelButtonInConsolidatedOrderPopup;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='myModal']//button[@class='close']")
+	private WebElement closeConsolidatedOrderPopup;
+	
+	@FindBy(how = How.ID, using="addManually")
+	private WebElement newItemButton;
+	
+	@FindBy(how = How.ID, using="addItemManually")
+	private WebElement clickSubmitForNewItem;
+	
+	@FindBy(how = How.ID, using="mcode")
+	private WebElement enterSKU;
+	
+	@FindBy(how = How.ID, using="mname")
+	private WebElement enterItemName;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='mModal']//button[@class='close']")
+	private WebElement closeItemAddPopup;
+	
+	@FindBy(how = How.ID, using="mquantity")
+	private WebElement quantityInNewItemPopup;
+	
+	@FindBy(how = How.XPATH, using="//label[@for='mcode']")
+	private WebElement clickOutQtyField;
+	
+	@FindBy(how = How.ID, using="mdiscount")
+	private WebElement discInNewItemPopup;
+	
+	@FindBy(how = How.ID, using="mprice")
+	private WebElement unitPriceInNewItemPopup;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='slTable']//tbody//tr//td[7]//span")
+	private WebElement getDiscAmount;
+	
 	public Map<Boolean,String> clickCustomerField() {
 		
 		return Elements.CLICK(driver, clickCustomerField);
@@ -243,7 +431,7 @@ public class InvoiceCreationPage {
 	
 	public Map<Boolean,String> enterItem() {
 		
-		return Elements.ENTERVALUE(driver, clickItemNameFieldAndEnterItem, "202");
+		return Elements.ENTERVALUE(driver, clickItemNameFieldAndEnterItem, "men");
 		
 	}
 	
@@ -412,7 +600,7 @@ public class InvoiceCreationPage {
 	
 	public String couponMsg()	{
 		String couponMessage = couponAppliedMsg.getText();
-		couponMessage.split(" for $ 5,000.00");
+		couponMessage.split(" for $ 70.00");
 		return couponMessage;
 	}
 	
@@ -420,7 +608,7 @@ public class InvoiceCreationPage {
 		return Elements.ENTERVALUE(driver, shippingAmount, ship);
 	}
 	
-public Map<Boolean,String> getAmount()	{
+	public Map<Boolean,String> getAmount()	{
 		
 		String globalAmt = null;
 		String dscAmt = null;
@@ -709,6 +897,663 @@ public Map<Boolean,String> getAmount()	{
 		
 		return Elements.CLICK(driver, clickUpdateBillingAddressButton);
 		
+	}
+	
+	public Map<Boolean,String> clickAddShippingAddress()	{
+		Map<Boolean,String> addAddress = null;
+		
+		for(int i=0;i<clickAddBillingAddressButton.size();i++)	{
+			if(i==1){
+				WebElement element = clickAddBillingAddressButton.get(i);
+				addAddress = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return addAddress;
+	}
+	
+	public Map<Boolean,String> clickShippingAddress()	{
+		
+		return Elements.CLICK(driver, clickShippingAddressField);
+		
+	}
+	
+	public Map<Boolean,String> enterShipAddress()	{
+		
+		return Elements.ENTERVALUE(driver, enterBillingAddress, "Plo");
+		
+	}
+	
+	public Map<Boolean,String> selectShipAddress()	{
+		
+		return Elements.CLICK(driver, selectBillingAddress);
+		
+	}
+	
+	public Map<Boolean,String> clickEditShipAddress()	{
+		
+		return Elements.CLICK(driver, editShippingAddress);
+		
+	}
+	
+	public Map<Boolean,String> clickAddCurrencyButton()	{
+		Map<Boolean,String> addCurrency = null;
+		
+		for(int i=0;i<clickAddBillingAddressButton.size();i++)	{
+			if(i==2){
+				WebElement element = clickAddBillingAddressButton.get(i);
+				addCurrency = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return addCurrency;
+	}
+	
+	public Map<Boolean,String> clickSaveCurrency()	{
+		
+		return Elements.CLICK(driver, clickSaveCurrencyButton);
+		
+	}
+	
+	public String alertMessage1()	{
+		String alertMess1 = alertMsg8.getText();
+		return alertMess1;
+	}
+	
+	public String alertMessage2()	{
+		String alertMess2 = alertMsg9.getText();
+		return alertMess2;
+	}
+	
+	public String alertMessage3()	{
+		String alertMess3 = alertMsg10.getText();
+		return alertMess3;
+	}
+	
+	public String alertMessage4()	{
+		String alertMess4 = alertMsg11.getText();
+		return alertMess4;
+	}
+	
+	public Map<Boolean,String> clickCurrencyCode()	{
+		
+		return Elements.CLICK(driver, clickCurrencyCodeField);
+		
+	}
+	
+	public Map<Boolean,String> enterCurrencyCode()	{
+		
+		return Elements.ENTERVALUE(driver, enterCurrencyCode, "Aus");
+		
+	}
+	
+	public Map<Boolean,String> selectCurrencyCode()	{
+		
+		return Elements.CLICK(driver, selectCurrencyCode);
+		
+	}
+	
+	public Map<Boolean,String> eraseRate()	{
+		
+		return Elements.ERASEVALUE(driver, exchangeRate);
+		
+	}
+	
+	public Map<Boolean,String> enterExchangeRate()	{
+		
+		return Elements.ENTERVALUE(driver, exchangeRate, "5.00");
+		
+	}
+	
+	
+	public Map<Boolean,String> clickSettingsFromSideMenu()	{
+		
+		return Elements.CLICK(driver, clickSettings);
+		
+	}
+	
+	public Map<Boolean,String> clickCurrencies()	{
+		
+		return Elements.CLICK(driver, clickCurrencies);
+		
+	}
+	
+	public Map<Boolean,String> clickCurrencyPopupClose()	{
+		Map<Boolean,String> closePopup = null;
+		
+		for(int i=0;i<closeCurrencyPopup.size();i++)	{
+			if(i==4){
+				WebElement element = closeCurrencyPopup.get(i);
+				closePopup = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return closePopup;
+	}
+	
+	public boolean verifyCurrencyPopupClosed()	{
+		
+		return Validations.IFELEMENTPRESENT(verifyCurrencyPopupClosed);
+		
+	}
+	
+	public Map<Boolean,String> clicksResetButton()	{
+		
+		return Elements.CLICK(driver, clickResetButton);
+		
+	}
+	
+	public Map<Boolean,String> clickOKinReset()	{
+		
+		return Elements.CLICK(driver, clickOKinResetPopup);
+		
+	}
+	
+	public String afterReset()	{
+		String value = verifyAfterReset.getText();
+		return value;
+	}
+	
+	public void scroll4()	{
+		Scrolling.SCROLLINTOVIEW(driver, scrollToCustField);
+	}
+	
+	public Map<Boolean,String> clickCancelinReset()	{
+		
+		return Elements.CLICK(driver, clickCancelinResetPopup);
+		
+	}
+	
+	public boolean verifyResetPopupDisappears()	{
+		
+		return Validations.IFELEMENTPRESENT(clickCancelinResetPopup);
+		
+	}
+	
+	public Map<Boolean,String> resetPopupClose()	{
+		
+		return Elements.CLICK(driver, resetPopupCloses);
+		
+	}
+	
+	public boolean verifyResetPopupCloses()	{
+		
+		return Validations.IFELEMENTPRESENT(resetPopupCloses);
+		
+	}
+	
+	public Map<Boolean,String> clickSaleStatus()	{
+		
+		return Elements.CLICK(driver, clickSaleStatusField);
+		
+	}
+	
+	public Map<Boolean,String> selectSaleStatusCompleted()	{
+		Map<Boolean,String> status = null;
+		
+		for(int i=0;i<saleStatus.size();i++)	{
+			if(i==0){
+				WebElement element = saleStatus.get(i);
+				status = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return status;
+	}
+	
+	public Map<Boolean,String> selectSaleStatusProcessing()	{
+		Map<Boolean,String> status = null;
+		
+		for(int i=0;i<saleStatus.size();i++)	{
+			if(i==1){
+				WebElement element = saleStatus.get(i);
+				status = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return status;
+	}
+	
+	public Map<Boolean,String> selectSaleStatusPending()	{
+		Map<Boolean,String> status = null;
+		
+		for(int i=0;i<saleStatus.size();i++)	{
+			if(i==2){
+				WebElement element = saleStatus.get(i);
+				status = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return status;
+	}
+	
+	public Map<Boolean,String> selectSaleStatusCancelled()	{
+		Map<Boolean,String> status = null;
+		
+		for(int i=0;i<saleStatus.size();i++)	{
+			if(i==3){
+				WebElement element = saleStatus.get(i);
+				status = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return status;
+	}
+	
+	public Map<Boolean,String> clickInvoiceSalesBreadcrumb()	{
+		
+		return Elements.CLICK(driver, invoiceSalesBreadcrumb);
+		
+	}
+	
+	public Map<Boolean,String> clickDashboardBreadcrumb()	{
+		
+		return Elements.CLICK(driver, dashboardBreadcrumb);
+		
+	}
+	
+	public Map<Boolean,String> clickGSTField()	{
+		
+		return Elements.CLICK(driver, clickGSTField);
+		
+	}
+		
+	public Map<Boolean,String> selectGSToption()	{
+		
+		return Elements.CLICK(driver, selectGSTAt7PercentOption);
+		
+	}
+	
+	public double amountFor7PercentGST()	{
+		String amount = null;
+		String afterTrim = null;
+		double d;
+		StringBuilder builder = new StringBuilder();
+		
+		for(int i=0;i<discAmount.size();i++) {
+			if(i==2) {
+				WebElement element = discAmount.get(i);
+				amount = element.getText();
+				break;
+			}
+		}
+		afterTrim = amount.substring(2);
+		if(afterTrim.contains(","))
+		{
+		String[] retval = afterTrim.split(",");
+	    for(String a:retval) {
+	    	builder.append(a);
+	    }
+	    	d = Double.parseDouble(builder.toString());
+		}else{
+			builder.append(afterTrim);
+			d = Double.parseDouble(builder.toString());
+		}
+		double e = (d/100)*7;
+		return d+e;
+	}
+	 
+	public double totalAmt()	{
+		
+		String s = totalAmountForInvoice.getText();
+		String trim = s.substring(2);
+		double d;
+		StringBuilder builder = new StringBuilder();
+		if(trim.contains(",")) 
+			{
+				String[] retval = trim.split(",");
+				for(String a:retval) {
+					builder.append(a);
+				}
+				d = Double.parseDouble(builder.toString());
+			} else {
+				builder.append(trim);
+				d = Double.parseDouble(builder.toString());
+			}
+		return d;	
+	}
+	
+	public void scroll7()	{
+		
+		Scrolling.SCROLLINTOVIEW(driver, recurringEnableDisableKey);
+		
+	}
+	
+	public Map<Boolean,String> clickRecurringEnableDisableButton()	{
+		
+		return Elements.CLICK(driver, recurringEnableDisableKey);
+		
+	}
+	
+	public String upcomingInvDate()	{
+		String upcomingDate = upcomingInvoiceDate.getText();
+		String trim = upcomingDate.substring(25);
+		return trim;	
+	}
+	
+	public String getNewDate()	{
+		LocalDate futureDate = LocalDate.now().plusMonths(1);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+		String newDate = formatter.format(futureDate);
+		System.out.println(newDate);
+		return newDate;	
+	}
+	
+	public Map<Boolean,String> clickRepeatField()	{
+		
+		return Elements.CLICK(driver, clickRepeatOptionField);
+		
+	}
+	
+	public Map<Boolean,String> chooseYearInRepeatOption()	{
+		
+		return Elements.CLICK(driver, chooseYearForRepeatOption);
+		
+	}
+	
+	public String getNewDateForYearOption()	{
+		LocalDate futureDate = LocalDate.now().plusYears(1);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+		String newDate = formatter.format(futureDate);
+		return newDate;
+		
+		
+	}
+	
+	public String upcomingEndDate()	{
+		String upcomingDate = upcomingInvoiceDate.getText();
+		String trim = upcomingDate.substring(48);
+		System.out.println(trim);
+		return trim;	
+	}
+	
+	public Map<Boolean,String> chooseAfterInEndsOption()	{
+		
+		return Elements.CLICK(driver, chooseAfterInEndsOption);
+		
+	}
+	
+	public Map<Boolean,String> enterRepeatTimes()	{
+		
+		return Elements.ENTERVALUE1(driver, repeatTimes, ".5");
+		
+	}
+	
+	public Map<Boolean,String> enterOccurence()	{
+		
+		return Elements.ENTERVALUE1(driver, endOccurence, ".5");
+		
+	}
+	
+	public String alertForRepeatTimes()	{
+		String repeat = null;
+		
+		for(int i=0;i<alertForRepeatTimesAndOccurence.size();i++)	{
+			if(i==1){
+				WebElement element = alertForRepeatTimesAndOccurence.get(i);
+				repeat = element.getText();
+				break;
+			}
+		}
+		return repeat;	
+	}
+	
+	public String alertForOccurence()	{
+		String repeat = null;
+		
+		for(int i=0;i<alertForRepeatTimesAndOccurence.size();i++)	{
+			if(i==2){
+				WebElement element = alertForRepeatTimesAndOccurence.get(i);
+				repeat = element.getText();
+				break;
+			}
+		}
+		return repeat;	
+	}
+	
+	public Map<Boolean,String> clickEditAfterAddingItem()	{
+		
+		return Elements.CLICK(driver, clickEditItemAfterAddingItem);
+		
+	}
+	
+	public Map<Boolean,String> editQuantityInEditItem(String quantity)	{
+		
+		return Elements.ENTERVALUE(driver, enterQuantityInEditOption, quantity);
+		
+	}
+	
+	public Map<Boolean,String> clickOutOfQuantityField()	{
+		Map<Boolean,String> qty = null;
+		
+		for(int i=0;i<clickOutOfQuantityField.size();i++)	{
+			if(i==3) {
+				WebElement element = clickOutOfQuantityField.get(i);
+				qty = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return qty;
+	}
+	
+	public Map<Boolean,String> enterDiscountInItemEdit(String disc)	{
+		
+		return Elements.ENTERVALUE(driver, discountInItemEdit, disc);	
+		
+	}
+	
+	public Map<Boolean,String> clickSubmit() {
+		
+		return Elements.CLICK(driver, clickSubmitButton);
+		
+	}
+	
+	public Map<Boolean,String> getAmountinItemEdit()	{
+		
+		String globalAmt = null;
+		String dscAmt = null;
+		Map<Boolean,String> discounts = new HashMap<>();
+		
+		dscAmt = netUnitPrice.getText();
+		
+		globalAmt = dscAmt.substring(2, dscAmt.indexOf('.'));
+		discounts.put(true, globalAmt);
+		return discounts;
+		
+	}
+	
+	public Long amountinItemEdit()	{
+		long amount;
+		long add = 0; 
+		String amt = getAmountinItemEdit().get(true);
+		StringBuilder builder = new StringBuilder();
+		if(amt.contains(","))
+		{
+		String[] retval = amt.split(",");
+	    for(String a:retval) {
+	    	builder.append(a);
+	    }
+	    	add = Long.parseLong(builder.toString());
+		}else{
+			builder.append(amt);
+			add = Long.parseLong(builder.toString());
+		}
+	    
+	    amount = add + 1;
+		return amount;
+	}
+	
+	public Map<Boolean,String> enterDiscountinEdit()	{
+		
+		return Elements.ENTERVALUE(driver, discountInItemEdit, Long.toString(amountinItemEdit()));
+		
+	}
+	
+	public Map<Boolean,String> closeItemEditPopup()	{
+		Map<Boolean,String> closePopup = null;
+		
+		for(int i=0;i<closeItemEditPopup.size();i++) {
+			if(i==1) {
+				WebElement element = closeItemEditPopup.get(i);
+				closePopup = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return closePopup;
+	}
+	
+	public boolean VerifyThePopupClose()	{
+		boolean verify = true;
+		
+		for(int i=0;i<closeItemEditPopup.size();i++) {
+			if(i==1) {
+				WebElement element = closeItemEditPopup.get(i);
+				verify = Validations.IFELEMENTPRESENT(element);
+				break;
+			}
+		}
+		return verify;
+	}
+	
+	public Map<Boolean,String> clickLocation()	{
+		
+		return Elements.CLICK(driver, clickLocation);
+		
+	}
+	
+	public Map<Boolean,String> chooseLocation()	{
+		
+		return Elements.CLICK(driver, chooseLocation);
+		
+	}
+	
+	public Map<Boolean,String> clickConsolidatedOrdersButton()	{
+		
+		return Elements.CLICK(driver, clickConsolidatedOrdersButton);
+		
+	}
+	
+	public Map<Boolean,String> clickSelectOrdersButton()	{
+		
+		return Elements.CLICK(driver, clickSelectOrdersButton);
+		
+	}
+	
+	public Map<Boolean,String> chooseConsolidatedOrder()	{
+		
+		return Elements.CLICK(driver, chooseOrder);
+		
+	}
+	
+	public boolean verifyOrderTable()	{
+		boolean orderItemTable;
+		
+		if(orderTableItems.size() != 0) {
+			orderItemTable = true;
+		} else {
+			orderItemTable = false;
+		}
+		return orderItemTable;
+	}
+	
+	public Map<Boolean,String> clickCancelButton()	{
+		
+		return Elements.CLICK(driver, cancelButtonInConsolidatedOrderPopup);
+		
+	}
+	
+	public boolean verifyConsolidatedOrderPopupClosed()	{
+		
+		return Validations.IFELEMENTPRESENT(cancelButtonInConsolidatedOrderPopup);
+		
+	}
+	
+	public Map<Boolean,String> closeConsolidatedOrderPopup()	{
+		
+		return Elements.CLICK(driver, closeConsolidatedOrderPopup);
+		
+	}
+	
+	public void scroll8()	{
+		
+		Scrolling.SCROLLINTOVIEW(driver, newItemButton);
+		
+	}
+	
+	public Map<Boolean,String> clickNewItemButton()	{
+		
+		return Elements.CLICK(driver, newItemButton);
+		
+	}
+	
+	public Map<Boolean,String> clickSubmitButtonForNewItem()	{
+		
+		return Elements.CLICK(driver, clickSubmitForNewItem);
+		
+	}
+	
+	public String GenerateRandomSKU(int n)	{
+		
+		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                					+ "0123456789"
+                					+ "abcdefghijklmnopqrstuvxyz";
+
+		StringBuilder sb = new StringBuilder(n);
+
+		for (int i = 0; i < n; i++) {
+			int index = (int)(AlphaNumericString.length()* Math.random());
+			sb.append(AlphaNumericString.charAt(index));
+			}
+
+		return sb.toString();
+		
+	}
+	
+	public Map<Boolean,String> enterSKU()	{
+		
+		return Elements.ENTERVALUE(driver, enterSKU, GenerateRandomSKU(10));
+		
+	}
+	
+	public Map<Boolean,String> enterItemName()	{
+		
+		return Elements.ENTERVALUE(driver, enterItemName, "TestItem 001");
+		
+	}
+	
+	public Map<Boolean,String> closeAddItemPopup()	{
+		
+		return Elements.CLICK(driver, closeItemAddPopup);
+		
+	}
+	
+	public Map<Boolean,String> enterQty(String qty)  {
+		
+		return Elements.ENTERVALUE(driver, quantityInNewItemPopup, qty);
+		
+	}
+	
+	public Map<Boolean,String> clickOutQtyField()	{
+		
+		return Elements.CLICK(driver, clickOutQtyField);
+		
+	}
+	
+	public Map<Boolean,String> enterDiscInNewItemPopup(String discount)	{
+		
+		return Elements.ENTERVALUE(driver, discInNewItemPopup, discount);
+		
+	}
+	
+	public Map<Boolean,String> enterUnitPriceInNewItemPopup()	{
+		
+		return Elements.ENTERVALUE(driver, unitPriceInNewItemPopup, "50");
+		
+	}
+	
+	public String verifyDiscAmountForNewItem()	{
+		
+		return getDiscAmount.getText().substring(2);
 	}
 	
 	

@@ -20,7 +20,7 @@ import net.masterthought.cucumber.sorting.SortingMethod;
 				features="src/test/resources/Features",
 				glue="stepDefinitions",
 				dryRun=false,
-				plugin={"json:target/cucumber-report/cucumber.json","de.monochromata.cucumber.report.PrettyReports:target/cucumber"},
+				plugin={"json:target/cucumber-report/cucumber.json","de.monochromata.cucumber.report.PrettyReports:target/cucumber","rerun:target/rerun.txt"},
 				tags = "@Test",
 				monochrome=true
 				)

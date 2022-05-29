@@ -57,6 +57,10 @@ public class AddPaymentPage {
 	@FindBy(how = How.ID, using="attachment")
 	private WebElement attach;
 	
+	@FindBy(how = How.XPATH, using="//label[@for='paid_by_1']")
+	private WebElement clickOutOfAmountField;
+	
+	
 	public Map<Boolean,String> amount()	{
 		
 		return Elements.CTRLAWITHDELETE(driver, amountField);
@@ -231,13 +235,19 @@ public class AddPaymentPage {
 	
 	public Map<Boolean,String> attachFile()	{
 		
-		return Elements.UPLOADFILE(driver, attach, "E:\\\\Steps to Run the Test Script.docx");
+		return Elements.UPLOADFILE(driver, attach, "F:\\document_attach.docx");
 		
 	}
 	
 	public Map<Boolean,String> enterAmount(String amt)	{
 		
 		return Elements.ENTERVALUE(driver, amountField, amt);
+		
+	}
+	
+	public Map<Boolean,String> clickOutAmountField()	{
+		
+		return Elements.CLICK(driver, clickOutOfAmountField);
 		
 	}
 	

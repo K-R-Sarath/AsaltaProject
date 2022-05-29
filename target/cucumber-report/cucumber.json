@@ -11,7 +11,7 @@
         "steps": [
           {
             "result": {
-              "duration": 12349000000,
+              "duration": 11121000000,
               "status": "passed"
             },
             "line": 4,
@@ -23,7 +23,7 @@
           },
           {
             "result": {
-              "duration": 4745000000,
+              "duration": 3656000000,
               "status": "passed"
             },
             "line": 5,
@@ -45,7 +45,7 @@
           },
           {
             "result": {
-              "duration": 3966000000,
+              "duration": 2163000000,
               "status": "passed"
             },
             "line": 6,
@@ -57,7 +57,7 @@
           },
           {
             "result": {
-              "duration": 1440000000,
+              "duration": 1396000000,
               "status": "passed"
             },
             "line": 7,
@@ -69,7 +69,7 @@
           },
           {
             "result": {
-              "duration": 14000000,
+              "duration": 19000000,
               "status": "passed"
             },
             "line": 8,
@@ -78,31 +78,19 @@
               "location": "stepDefinitions.InvoiceListPageSteps.user_navigates_to_invoice_sale()"
             },
             "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 2103000000,
-              "status": "passed"
-            },
-            "line": 9,
-            "name": "User clicks New Invoice Sale button",
-            "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_new_invoice_sale_button()"
-            },
-            "keyword": "And "
           }
         ]
       },
       {
-        "start_timestamp": "2022-05-13T11:50:35.879Z",
-        "line": 273,
-        "name": "Check whether user can close edit billing address popup",
+        "start_timestamp": "2022-05-28T14:19:27.672Z",
+        "line": 74,
+        "name": "Check whether filtering invoices by date displays only invoices of filtered date",
         "description": "",
-        "id": "createinvoice;check-whether-user-can-close-edit-billing-address-popup",
+        "id": "invoicelist;check-whether-filtering-invoices-by-date-displays-only-invoices-of-filtered-date",
         "after": [
           {
             "result": {
-              "duration": 3000000,
+              "duration": 2000000,
               "status": "passed"
             },
             "match": {
@@ -111,7 +99,7 @@
           },
           {
             "result": {
-              "duration": 1685000000,
+              "duration": 3361000000,
               "status": "passed"
             },
             "match": {
@@ -124,61 +112,61 @@
         "steps": [
           {
             "result": {
-              "duration": 3472000000,
+              "duration": 585000000,
               "status": "passed"
             },
-            "line": 274,
-            "name": "User selects customer",
+            "line": 75,
+            "name": "User clicks date field",
             "match": {
-              "location": "stepDefinitions.InvoiceCreationPageSteps.user_selects_customer()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_date_field()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 3442000000,
+              "duration": 1737000000,
               "status": "passed"
             },
-            "line": 275,
-            "name": "User selects billing address",
+            "line": 76,
+            "name": "User clicks from date field and enter date",
             "match": {
-              "location": "stepDefinitions.InvoiceCreationPageSteps.user_selects_billing_address()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_from_date_field_and_enter_date()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 403000000,
+              "duration": 1761000000,
               "status": "passed"
             },
-            "line": 276,
-            "name": "User clicks edit option",
+            "line": 77,
+            "name": "User clicks to date field and enter date",
             "match": {
-              "location": "stepDefinitions.InvoiceCreationPageSteps.user_clicks_edit_option()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_to_date_field_and_enter_date()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 382000000,
+              "duration": 399000000,
               "status": "passed"
             },
-            "line": 277,
-            "name": "User closes billing address popup",
+            "line": 78,
+            "name": "User clicks Apply button",
             "match": {
-              "location": "stepDefinitions.InvoiceCreationPageSteps.user_closes_billing_address_popup()"
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_apply_button()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 31077000000,
+              "duration": 321000000,
               "status": "passed"
             },
-            "line": 278,
-            "name": "Verify popup closed",
+            "line": 79,
+            "name": "Verify invoices date",
             "match": {
-              "location": "stepDefinitions.InvoiceCreationPageSteps.verify_popup_closed()"
+              "location": "stepDefinitions.InvoiceListPageSteps.verify_invoices_date()"
             },
             "keyword": "Then "
           }
@@ -193,11 +181,11 @@
         ]
       }
     ],
-    "name": "CreateInvoice",
+    "name": "InvoiceList",
     "description": "",
-    "id": "createinvoice",
+    "id": "invoicelist",
     "keyword": "Feature",
-    "uri": "file:src/test/resources/Features/CreateInvoice.feature",
+    "uri": "file:src/test/resources/Features/InvoiceList.feature",
     "tags": []
   }
 ]

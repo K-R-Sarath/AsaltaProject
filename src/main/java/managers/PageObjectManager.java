@@ -9,6 +9,7 @@ import pageObjects.DashboardPage;
 import pageObjects.DeliveryListPage;
 import pageObjects.EditDeliveryPage;
 import pageObjects.EditInvoicePage;
+import pageObjects.EmailInvoicePage;
 import pageObjects.InvoiceCreationPage;
 import pageObjects.InvoiceListPage;
 import pageObjects.LoginPage;
@@ -30,6 +31,7 @@ public class PageObjectManager {
 	private EditDeliveryPage editDelivery;
 	private CreateQuotationPage createQuotation;
 	private QuotationListPage quotation;
+	private EmailInvoicePage emailInvoice;
 	
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -81,6 +83,10 @@ public class PageObjectManager {
 	
 	public QuotationListPage getQuotationListPage()	{
 		return (quotation == null) ? quotation = new QuotationListPage(driver) : quotation;
+	}
+	
+	public EmailInvoicePage getEmailInvoicePage() {
+		return (emailInvoice == null) ? emailInvoice = new EmailInvoicePage(driver) : emailInvoice;
 	}
 
 }

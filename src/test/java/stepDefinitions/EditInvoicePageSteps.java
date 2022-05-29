@@ -21,8 +21,6 @@ public class EditInvoicePageSteps {
 		editInvoice = testContext.getPageObjectManager().getEditInvoicePage();
 	}
 	
-	
-	
 	@When("User scrolls down to items")
 	public void user_scrolls_down_to_items() {
 	    editInvoice.scroll();
@@ -108,13 +106,6 @@ public class EditInvoicePageSteps {
 	    Assert.assertTrue(status.get(false),status.containsKey(true));
 	}
 	
-	//Check whether system throws "Please provide valid Coupon code" while clicking Apply button without entering coupon
-
-	@When("User scrolls down to coupons")
-	public void user_scrolls_down_to_coupons() {
-	    editInvoice.scroll2();
-	}
-	
 	//Check whether user is able to delete the item
 	
 	@When("User deletes item")
@@ -164,6 +155,56 @@ public class EditInvoicePageSteps {
 	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
 	}
 	
+	//Check whether system throws "Invoice No must be unique" when we duplicate the invoice number
+	
+	@When("User enters duplicate invoice number")
+	public void user_enters_duplicate_invoice_number() {
+	    Map<Boolean,String> status = editInvoice.duplicateInvoiceNo();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	//Check whether revisions are getting stored when we edit and save invoice
+	
+	@When("Scroll to revisions field")
+	public void scroll_to_revisions_field() {
+	    editInvoice.scroll4();
+	}
+	
+	@When("Click revisions field")
+	public void click_revisions_field() {
+		Map<Boolean,String> status = editInvoice.clickRevisionsField();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("Get revisions list")
+	public void get_revisions_list() {
+	   editInvoice.getRevisionsList();
+	}
+	
+	@When("Choose revision")
+	public void choose_revision() {
+		Map<Boolean,String> status = editInvoice.selectRevision();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	@When("Now get revisions list")
+	public void now_get_revisions_list() {
+	    editInvoice.nowGetRevisionsList();
+	}
+
+	@Then("Revisions list should be added by one more revision")
+	public void revisions_list_should_be_added_by_one_more_revision() {
+	    if((editInvoice.nowGetRevisionsList()) != 0) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+
+
+
+
+
 
 
 

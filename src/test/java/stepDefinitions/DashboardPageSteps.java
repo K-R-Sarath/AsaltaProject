@@ -48,6 +48,26 @@ public class DashboardPageSteps {
 	   Assert.assertTrue(status1.get(false), status1.containsKey(true));
 	}
 	
+	//Check whether clicking dashboard in breadcrumbs in invoice sale page navigates to dashboard page
+	
+	@Then("It should navigate to dashboard page")
+	public void it_should_navigate_to_dashboard_page() {
+	    boolean status = dashboard.verifyDashboard();
+	    if(status)	{
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+	
+	
+	
+	
+
+
+
+
+	
 	
 	
 }

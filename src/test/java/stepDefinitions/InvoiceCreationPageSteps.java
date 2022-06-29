@@ -30,18 +30,18 @@ public class InvoiceCreationPageSteps {
 	   invoiceCreation.scroll();
 	   Map<Boolean,String> status3 = invoiceCreation.enterItem();
 	   Assert.assertTrue(status3.get(false), status3.containsKey(true));
-	   Map<Boolean,String> status4 = invoiceCreation.selectItem();
-	   Assert.assertTrue(status4.get(false), status4.containsKey(true));
+	  // Map<Boolean,String> status4 = invoiceCreation.selectItem();
+	   //Assert.assertTrue(status4.get(false), status4.containsKey(true));
 	   
 	}
 	@When("Click save sale button")
-	public void click_save_sale_button() {
+	public void click_save_sale_button() throws InterruptedException {
 	    Map<Boolean,String> status = invoiceCreation.clickAddSaleButton();
 	    Assert.assertTrue(status.get(false),status.containsKey(true));
 		
 	}
 	@Then("Invoice created successfully")
-	public void invoice_created_successfully() {
+	public void invoice_created_successfully()  {
 	    String succ = invoiceCreation.success();
 	    if(succ.equalsIgnoreCase("Invoice sale successfully added")) {
 	    	Assert.assertTrue(true);
@@ -270,7 +270,7 @@ public class InvoiceCreationPageSteps {
 	}
 	
 	@When("User enters name of the customer as {string}")
-	public void user_enters_name_of_the_customer_as(String customerName) {
+	public void user_enters_name_of_the_customer_as(String customerName)  {
 	   Map<Boolean,String> status = invoiceCreation.enterCustName(customerName);
 	   Assert.assertTrue(status.get(false), status.containsKey(true));
 	}

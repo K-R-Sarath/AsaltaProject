@@ -33,8 +33,8 @@ public class CreateQuotationPage {
 	@FindBy(how = How.ID, using="search_items-selectized")
 	private WebElement searchItem;
 	
-	@FindBy(how = How.XPATH, using="//div[@class='selectize-dropdown-content']//div[@class='row'][2]")
-	private WebElement selectItem;
+	@FindBy(how = How.XPATH, using="//div[@class='selectize-dropdown-content']//div[@class='row']")
+	private List<WebElement> selectItem;
 	
 	@FindBy(how = How.ID, using="add_quote")
 	private WebElement saveQuoteButton;
@@ -69,14 +69,21 @@ public class CreateQuotationPage {
 	
 	public Map<Boolean,String> searchItem()	{
 		
-		return Elements.ENTERVALUE(driver, searchItem, "a");
+		return Elements.ENTERVALUE(driver, searchItem, "men silver");
 		
 	}
 	
 	public Map<Boolean,String> selectItem()	{
+		Map<Boolean,String> item = null;
 		
-		return Elements.CLICK(driver, selectItem);
-		
+		for(int i=0;i<selectItem.size();i++) {
+			if(i==1) {
+				WebElement element = selectItem.get(i);
+				item = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return item;	
 	}
 	
 	public void scroll()	{

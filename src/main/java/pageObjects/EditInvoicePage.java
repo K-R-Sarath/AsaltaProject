@@ -254,7 +254,6 @@ public class EditInvoicePage {
 	
 	public Integer getRevisionsList()	{
 		
-		System.out.println(revisionsList.size());
 		return revisionsList.size();
 		
 	}
@@ -266,8 +265,6 @@ public class EditInvoicePage {
 	}
 	
 	public Integer nowGetRevisionsList()	{
-		
-		System.out.println(revisionsList.size());
 		
 		return revisionsList.size();
 		

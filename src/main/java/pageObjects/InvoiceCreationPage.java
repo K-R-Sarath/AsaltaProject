@@ -431,7 +431,7 @@ public class InvoiceCreationPage {
 	
 	public Map<Boolean,String> enterItem() {
 		
-		return Elements.ENTERVALUE(driver, clickItemNameFieldAndEnterItem, "men");
+		return Elements.ENTERVALUE(driver, clickItemNameFieldAndEnterItem, "men silver");
 		
 	}
 	

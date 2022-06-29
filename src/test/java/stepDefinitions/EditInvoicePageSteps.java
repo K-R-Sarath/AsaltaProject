@@ -15,6 +15,7 @@ public class EditInvoicePageSteps {
 	
 	TestContext testContext;
 	EditInvoicePage editInvoice;
+	Integer storeRevisionsList;
 	
 	public EditInvoicePageSteps(TestContext context)	{
 		testContext = context;
@@ -178,7 +179,7 @@ public class EditInvoicePageSteps {
 	
 	@When("Get revisions list")
 	public void get_revisions_list() {
-	   editInvoice.getRevisionsList();
+	   storeRevisionsList = editInvoice.getRevisionsList();
 	}
 	
 	@When("Choose revision")
@@ -194,7 +195,7 @@ public class EditInvoicePageSteps {
 
 	@Then("Revisions list should be added by one more revision")
 	public void revisions_list_should_be_added_by_one_more_revision() {
-	    if((editInvoice.nowGetRevisionsList()) != 0) {
+	    if((editInvoice.nowGetRevisionsList()) > storeRevisionsList) {
 	    	Assert.assertTrue(true);
 	    } else {
 	    	Assert.assertTrue(false);

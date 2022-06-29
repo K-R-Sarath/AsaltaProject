@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import java.text.ParseException;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -482,6 +483,593 @@ public class InvoiceListPageSteps {
 	    	Assert.assertTrue(false);
 	    }
 	}
+
+	//Check whether status can be sorted in Ascending order
+	
+	@When("User clicks Status")
+	public void user_clicks_status() {
+		Map<Boolean,String> status1 = invoice.clickStatus();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("User gets obtained list and sorts it in Ascending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_obtained_list() {
+	   boolean status = invoice.verifyObtainedAndSortedList();
+	   if(status) {
+		   Assert.assertTrue(true);
+	   } else {
+		   Assert.assertTrue(false);
+	   }
+	}
+	
+	//Check whether status can be sorted in Descending order
+	
+	@Then("User gets obtained list and sorts it in Descending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_obtained_list() {
+	    boolean status = invoice.verifyObtainedAndSortedListinDescOrder();
+	    if(status) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+	
+	//Check whether channels can be sorted in Ascending order
+	
+	@When("User clicks Channels")
+	public void user_clicks_channels() {
+		Map<Boolean,String> status1 = invoice.clickChannels();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("User gets obtained list of channels and sorts it in Ascending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_of_channels_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_obtained_list() throws Exception {
+		boolean status = invoice.verifyObtainedAndSortedChannels();
+		if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether channels can be sorted in descending order
+	
+	@Then("User gets obtained list of channels and sorts it in descending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_of_channels_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedChannelsInDescOrder();
+		if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether channel order number can be sorted in ascending order
+	
+	@When("User clicks channel order no")
+	public void user_clicks_channel_order_no() throws Exception {
+		Map<Boolean,String> status1 = invoice.clickChannelOrderNo();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of channel order number and sorts in in ascending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_of_channel_order_number_and_sorts_in_in_ascending_order_and_verify_the_sorted_list_with_obtained_list() throws Exception {
+		boolean status = invoice.verifyObtainedAndSortedChannelOrderNo();
+		if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether channel order number can be sorted in descending order
+	
+	@Then("User gets obtained list of channel order number and sorts it in descending order and verify the sorted list with obtained list")
+	public void user_gets_obtained_list_of_channel_order_number_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_obtained_list() {
+	    boolean status = invoice.verifyObtainedAndSortedChannelOrderNoInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether invoice numbers can be sorted in ascending order
+	
+	@When("User clicks invoice")
+	public void user_clicks_invoice() throws InterruptedException {
+		Map<Boolean,String> status1 = invoice.clickInvoices();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of invoices and sorts it in ascending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_invoices_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_the_obtained_list() throws ParseException {
+		boolean status = invoice.verifyObtainedAndSortedInvoices();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether invoice numbers can be sorted in descending order
+	
+	@Then("User gets obtained list of invoices and sorts it in descending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_invoices_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_the_obtained_list() throws ParseException {
+		boolean status = invoice.verifyObtainedAndSortedInvoicesInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether billers can be sorted in ascending order
+	
+	@When("User clicks billers")
+	public void user_clicks_billers() throws InterruptedException {
+		Map<Boolean,String> status1 = invoice.clickBillers();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of billers and sorts it in ascending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_billers_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedBillers();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether billers can be sorted in descending order			
+	
+	@Then("User gets obtained list of billers and sorts it in descending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_billers_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedBillersInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether customers can be sorted in ascending order
+	
+	@When("User clicks customers")
+	public void user_clicks_customers() throws InterruptedException {
+		Map<Boolean,String> status1 = invoice.clickCustomers();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of customers and sorts it in ascending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_customers_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedCustomers();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether customers can be sorted in descending order
+	
+	@Then("User gets obtained list of customers and sorts it in descending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_customers_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedCustomersInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether total amount can be sorted in ascending order	
+	
+	@When("User clicks total")
+	public void user_clicks_total() throws InterruptedException {
+		Map<Boolean,String> status1 = invoice.clickTotal();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of total amounts and sorts it in ascending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_total_amounts_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedTotalAmount();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether total amount can be sorted in descending order 
+	
+	@Then("User gets obtained list of total amounts and sorts it in descending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_total_amounts_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedTotalAmountInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether outstanding amount can be sorted in ascending order
+	
+	@When("User clicks outstanding")
+	public void user_clicks_outstanding() throws InterruptedException {
+		Map<Boolean,String> status1 = invoice.clickOutstanding();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	    Thread.sleep(1000);
+	}
+	
+	@Then("User gets obtained list of outstanding amounts and sorts it in ascending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_outstanding_amounts_and_sorts_it_in_ascending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedOutstandingAmount();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether outstanding amount can be sorted in descending order
+	
+	@Then("User gets obtained list of outstanding amounts and sorts it in descending order and verify the sorted list with the obtained list")
+	public void user_gets_obtained_list_of_outstanding_amounts_and_sorts_it_in_descending_order_and_verify_the_sorted_list_with_the_obtained_list() {
+		boolean status = invoice.verifyObtainedAndSortedOutstandingAmountInDescOrder();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by invoice sales channel displays invoices only of the filtered channel
+
+	@When("User clicks channels dropdown")
+	public void user_clicks_channels_dropdown() {
+		Map<Boolean,String> status1 = invoice.clickChannelDropdown();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@When("User selects Invoice sales in channels")
+	public void user_selects_invoice_sales_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectInvoiceSales();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only invoice sales channel invoices are displayed")
+	public void only_invoice_sales_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsInvoiceSale();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by pos channel displays invoices only of the filtered channel
+	
+	@When("User selects pos in channels")
+	public void user_selects_pos_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectPOS();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only pos channel invoices are displayed")
+	public void only_pos_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsPOS();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by ecommerce channel displays invoices only of the filtered channel
+	
+	@When("User selects ecommerce in channels")
+	public void user_selects_ecommerce_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectEcommerce();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only ecommerce channel invoices are displayed")
+	public void only_ecommerce_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsEcommerce();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+	
+	//Check whether filtering invoices by woocommerce channel displays invoices only of the filtered channel
+	
+	@When("User selects woocommerce in channels")
+	public void user_selects_woocommerce_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectWoocommerce();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only woocommerce channel invoices are displayed")
+	public void only_woocommerce_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsWoocommerce();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by opencart channel displays invoices only of the filtered channel	
+	
+	@When("User selects opencart in channels")
+	public void user_selects_opencart_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectOpencart();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only opencart channel invoices are displayed")
+	public void only_opencart_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsOpencart();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by shopify channel displays invoices only of the filtered channel	
+	
+	@When("User selects shopify in channels")
+	public void user_selects_shopify_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectShopify();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only shopify channel invoices are displayed")
+	public void only_shopify_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsShopify();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by lazada channel displays invoices only of the filtered channel
+	
+	@When("User selects lazada in channels")
+	public void user_selects_lazada_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectLazada();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only lazada channel invoices are displayed")
+	public void only_lazada_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsLazada();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether filtering invoices by shopee channel displays invoices only of the filtered channel
+	
+	@When("User selects shopee in channels")
+	public void user_selects_shopee_in_channels() {
+		Map<Boolean,String> status1 = invoice.selectShopee();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Only shopee channel invoices are displayed")
+	public void only_shopee_channel_invoices_are_displayed() {
+		boolean status = invoice.filteredChannelIsShopee();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+	
+	//Check whether search is working for channel order number
+	
+	@When("User searches for channel order no")
+	public void user_searches_for_channel_order_no() {
+		Map<Boolean,String> status1 = invoice.searchChannelOrderNo();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched channel order no is displayed")
+	public void searched_channel_order_no_is_displayed() {
+		boolean status = invoice.searchResultForChannelOrderNo();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether search is working for invoices
+	
+	@When("User searches for invoice")
+	public void user_searches_for_invoice() {
+		Map<Boolean,String> status1 = invoice.searchInvoice();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched invoice is displayed")
+	public void searched_invoice_is_displayed() {
+		boolean status = invoice.searchResultForInvoice();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether search is working for billers	
+	
+	@When("User searches for biller")
+	public void user_searches_for_biller() {
+		Map<Boolean,String> status1 = invoice.searchBiller();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched biller is displayed")
+	public void searched_biller_is_displayed() {
+		boolean status = invoice.searchResultForBiller();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether search is working for customers
+	
+	@When("User searches for customer")
+	public void user_searches_for_customer() {
+		Map<Boolean,String> status1 = invoice.searchCustomer();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched customer is displayed")
+	public void searched_customer_is_displayed() {
+		boolean status = invoice.searchResultForCustomer();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether search is working for total amount
+	
+	@When("User searches for total amount")
+	public void user_searches_for_total_amount() {
+		Map<Boolean,String> status1 = invoice.searchTotal();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched total amount is displayed")
+	public void searched_total_amount_is_displayed() {
+		boolean status = invoice.searchResultForTotalAmount();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether search is working for outstanding amount
+	
+	@When("User searches for outstanding amount")
+	public void user_searches_for_outstanding_amount() {
+		Map<Boolean,String> status1 = invoice.searchOutstanding();
+	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	}
+	
+	@Then("Searched outstanding amount is displayed")
+	public void searched_outstanding_amount_is_displayed() {
+		boolean status = invoice.searchResultForOutstandingAmount();
+	    if(status)	{
+			Assert.assertTrue(true);
+		} else {
+			Assert.assertTrue(false);
+		}
+	}
+
+	//Check whether multiple invoices can be added to delivery using more option
+	
+	@When("User clicks More button")
+	public void user_clicks_more_button() {
+		Map<Boolean,String> status = invoice.clickMoreButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User chooses add to delivery option")
+	public void user_chooses_add_to_delivery_option() {
+		Map<Boolean,String> status = invoice.clickBulkAddToDelivery();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@When("User selects invoices")
+	public void user_selects_invoices() {
+		boolean status = invoice.chooseCheckBox();
+	    if(status) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
+	
+	@When("User clicks convert to DO button")
+	public void user_clicks_convert_to_do_button() {
+		Map<Boolean,String> status = invoice.clickAddDeliveryButton();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+	//Check whether user is able to create invoice for the sale order
+	
+	@When("User clicks sales from side menu from invoice list page")
+	public void user_clicks_sales_from_side_menu_from_invoice_list_page() {
+		Map<Boolean,String> status = invoice.clickSalesInSideMenu();
+	    Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

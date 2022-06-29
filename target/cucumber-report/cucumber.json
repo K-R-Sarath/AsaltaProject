@@ -3,18 +3,40 @@
     "line": 1,
     "elements": [
       {
-        "line": 3,
-        "name": "Login and navigate to new invoice sale page",
+        "start_timestamp": "2022-06-29T12:41:02.319Z",
+        "line": 198,
+        "name": "Check whether system throws \"Delivery successfully added\" after adding Sale orders to deliveries in bulk after invoicing",
         "description": "",
-        "type": "background",
-        "keyword": "Background",
+        "id": "saleorderlist;check-whether-system-throws-\"delivery-successfully-added\"-after-adding-sale-orders-to-deliveries-in-bulk-after-invoicing",
+        "after": [
+          {
+            "result": {
+              "duration": 4000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.embedScreenshot(io.cucumber.java.Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 2095000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.quitDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 11121000000,
+              "duration": 12603000000,
               "status": "passed"
             },
-            "line": 4,
+            "line": 199,
             "name": "User is on login page",
             "match": {
               "location": "stepDefinitions.Steps.user_is_on_login_page()"
@@ -23,10 +45,10 @@
           },
           {
             "result": {
-              "duration": 3656000000,
+              "duration": 3589000000,
               "status": "passed"
             },
-            "line": 5,
+            "line": 200,
             "name": "User enters email as \"testra.j409@gmail.com\" and password as \"Cbsinf0.\"",
             "match": {
               "arguments": [
@@ -45,10 +67,10 @@
           },
           {
             "result": {
-              "duration": 2163000000,
+              "duration": 2394000000,
               "status": "passed"
             },
-            "line": 6,
+            "line": 201,
             "name": "User clicks login button",
             "match": {
               "location": "stepDefinitions.Steps.user_clicks_login_button()"
@@ -57,116 +79,265 @@
           },
           {
             "result": {
-              "duration": 1396000000,
+              "duration": 1384000000,
               "status": "passed"
             },
-            "line": 7,
-            "name": "User is on Dashboard page and clicks sales and invoice from side menu",
+            "line": 202,
+            "name": "User clicks sales from side menu",
             "match": {
-              "location": "stepDefinitions.DashboardPageSteps.user_is_on_dashboard_page()"
+              "location": "stepDefinitions.DashboardPageSteps.user_clicks_sales_from_side_menu()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 19000000,
+              "duration": 1293000000,
               "status": "passed"
             },
-            "line": 8,
-            "name": "User navigates to invoice sale",
+            "line": 203,
+            "name": "User clicks sale orders",
             "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_navigates_to_invoice_sale()"
-            },
-            "keyword": "And "
-          }
-        ]
-      },
-      {
-        "start_timestamp": "2022-05-28T14:19:27.672Z",
-        "line": 74,
-        "name": "Check whether filtering invoices by date displays only invoices of filtered date",
-        "description": "",
-        "id": "invoicelist;check-whether-filtering-invoices-by-date-displays-only-invoices-of-filtered-date",
-        "after": [
-          {
-            "result": {
-              "duration": 2000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "stepDefinitions.Hooks.embedScreenshot(io.cucumber.java.Scenario)"
-            }
-          },
-          {
-            "result": {
-              "duration": 3361000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "stepDefinitions.Hooks.quitDriver()"
-            }
-          }
-        ],
-        "type": "scenario",
-        "keyword": "Scenario",
-        "steps": [
-          {
-            "result": {
-              "duration": 585000000,
-              "status": "passed"
-            },
-            "line": 75,
-            "name": "User clicks date field",
-            "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_date_field()"
+              "location": "stepDefinitions.DashboardPageSteps.user_clicks_sale_orders()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 1737000000,
+              "duration": 1184000000,
               "status": "passed"
             },
-            "line": 76,
-            "name": "User clicks from date field and enter date",
+            "line": 204,
+            "name": "User clicks new order button",
             "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_from_date_field_and_enter_date()"
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_clicks_new_order_button()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 1761000000,
+              "duration": 3470000000,
               "status": "passed"
             },
-            "line": 77,
-            "name": "User clicks to date field and enter date",
+            "line": 205,
+            "name": "User chooses customer in new sale order page",
             "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_to_date_field_and_enter_date()"
+              "location": "stepDefinitions.CreateSaleOrderPageSteps.user_chooses_customer_in_new_sale_order_page()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 399000000,
+              "duration": 3364000000,
               "status": "passed"
             },
-            "line": 78,
-            "name": "User clicks Apply button",
+            "line": 206,
+            "name": "User selects shipping address",
             "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_apply_button()"
+              "location": "stepDefinitions.InvoiceCreationPageSteps.user_selects_shipping_address()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 321000000,
+              "duration": 1785000000,
               "status": "passed"
             },
-            "line": 79,
-            "name": "Verify invoices date",
+            "line": 207,
+            "name": "User selects items",
             "match": {
-              "location": "stepDefinitions.InvoiceListPageSteps.verify_invoices_date()"
+              "location": "stepDefinitions.CreateQuotationPageSteps.user_selects_items()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1198000000,
+              "status": "passed"
+            },
+            "line": 208,
+            "name": "User clicks save sale order button",
+            "match": {
+              "location": "stepDefinitions.CreateSaleOrderPageSteps.user_clicks_save_sale_order_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 181000000,
+              "status": "passed"
+            },
+            "line": 209,
+            "name": "System throws \"Sale Order successfully added\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Sale Order successfully added\"",
+                  "offset": 14
+                }
+              ],
+              "location": "stepDefinitions.EditInvoicePageSteps.system_throws(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 368000000,
+              "status": "passed"
+            },
+            "line": 210,
+            "name": "mouse hover on toast",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.mouse_hover_on_toast()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 397000000,
+              "status": "passed"
+            },
+            "line": 211,
+            "name": "User clicks the Action icon",
+            "match": {
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_the_action_icon()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 662000000,
+              "status": "passed"
+            },
+            "line": 212,
+            "name": "User clicks create invoice",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_clicks_create_invoice()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 33000000,
+              "status": "passed"
+            },
+            "line": 213,
+            "name": "User switches to new window",
+            "match": {
+              "location": "stepDefinitions.AddDeliveryPageSteps.user_switches_to_new_window()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1974000000,
+              "status": "passed"
+            },
+            "line": 214,
+            "name": "Click save sale button",
+            "match": {
+              "location": "stepDefinitions.InvoiceCreationPageSteps.click_save_sale_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 122000000,
+              "status": "passed"
+            },
+            "line": 215,
+            "name": "Invoice created successfully",
+            "match": {
+              "location": "stepDefinitions.InvoiceCreationPageSteps.invoice_created_successfully()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 380000000,
+              "status": "passed"
+            },
+            "line": 216,
+            "name": "User clicks sales from side menu from invoice list page",
+            "match": {
+              "location": "stepDefinitions.InvoiceListPageSteps.user_clicks_sales_from_side_menu_from_invoice_list_page()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 812000000,
+              "status": "passed"
+            },
+            "line": 217,
+            "name": "User clicks sale orders",
+            "match": {
+              "location": "stepDefinitions.DashboardPageSteps.user_clicks_sale_orders()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 511000000,
+              "status": "passed"
+            },
+            "line": 218,
+            "name": "User clicks more in sale order",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_clicks_more_in_sale_order()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 406000000,
+              "status": "passed"
+            },
+            "line": 219,
+            "name": "User chooses add to delivery",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_chooses_add_to_delivery()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 385000000,
+              "status": "passed"
+            },
+            "line": 220,
+            "name": "User selects SO by checkboxes for delivery",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_selects_so_by_checkboxes_for_delivery()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 353000000,
+              "status": "passed"
+            },
+            "line": 221,
+            "name": "User clicks Convert to DO button",
+            "match": {
+              "location": "stepDefinitions.SaleOrderListPageSteps.user_convert_change_to_do_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 46000000,
+              "status": "passed"
+            },
+            "line": 222,
+            "name": "System throws \"Delivery successfully added\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Delivery successfully added\"",
+                  "offset": 14
+                }
+              ],
+              "location": "stepDefinitions.EditInvoicePageSteps.system_throws(java.lang.String)"
             },
             "keyword": "Then "
           }
@@ -181,11 +352,11 @@
         ]
       }
     ],
-    "name": "InvoiceList",
+    "name": "SaleOrderList",
     "description": "",
-    "id": "invoicelist",
+    "id": "saleorderlist",
     "keyword": "Feature",
-    "uri": "file:src/test/resources/Features/InvoiceList.feature",
+    "uri": "file:src/test/resources/Features/SaleOrderList.feature",
     "tags": []
   }
 ]

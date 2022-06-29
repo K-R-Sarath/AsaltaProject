@@ -37,7 +37,8 @@ public class DashboardPageSteps {
 	//Check whether user is able to create quotation
 
 	@When("User clicks sales from side menu")
-	public void user_clicks_sales_from_side_menu() {
+	public void user_clicks_sales_from_side_menu() throws InterruptedException {
+		Thread.sleep(1000);
 		Map<Boolean,String> status = dashboard.clickSalesInSideMenu();
 		Assert.assertTrue(status.get(false),status.containsKey(true));
 	}
@@ -60,9 +61,23 @@ public class DashboardPageSteps {
 	    }
 	}
 	
+	//Return Sales
 	
+	@When("User is on Dashboard page and clicks sales and return sales from side menu")
+	public void user_is_on_dashboard_page_and_clicks_sales_and_return_sales_from_side_menu() {
+		Map<Boolean,String> status = dashboard.clickSalesInSideMenu();
+		Assert.assertTrue(status.get(false),status.containsKey(true));
+		Map<Boolean,String> status1 = dashboard.clickReturnSales();
+		Assert.assertTrue(status1.get(false),status1.containsKey(true));
+	}
 	
+	//Check whether user is able to add new sale order
 	
+	@When("User clicks sale orders")
+	public void user_clicks_sale_orders() {
+		Map<Boolean,String> status = dashboard.clickSaleOrder();
+		Assert.assertTrue(status.get(false),status.containsKey(true));
+	}
 
 
 

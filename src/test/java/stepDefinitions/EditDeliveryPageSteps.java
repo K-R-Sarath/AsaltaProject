@@ -97,10 +97,35 @@ public class EditDeliveryPageSteps {
 		Assert.assertTrue(status1.get(false), status1.containsKey(true));
 	}
 
+	//Check whether system throws alert when billing address and shipping address field is not filled in edit delivery
+	
+	@When("User clicks edit delivery button")
+	public void user_clicks_edit_delivery_button() {
+		Map<Boolean,String> status = editDelivery.clickEditDeliveryButton();
+		Assert.assertTrue(status.get(false), status.containsKey(true));
+	}
+	
+	@Then("First Alert is {string}")
+	public void first_alert_is(String msg) {
+		String alert = editDelivery.alertMessage1();
+		   if(alert.equals(msg)){
+			   Assert.assertTrue(true);
+		   } else {
+			   Assert.assertTrue(false);
+		   }
+	}
 
-
-
-
+	//Check whether clicking edit in picklist popup navigates to edit deliveries page
+	
+	@Then("System should navigate to edit deliveries page")
+	public void system_should_navigate_to_edit_deliveries_page() {
+	    String status = editDelivery.verifyEditPage();
+	    if(status.equalsIgnoreCase("Edit Delivery")) {
+	    	Assert.assertTrue(true);
+	    } else {
+	    	Assert.assertTrue(false);
+	    }
+	}
 
 
 

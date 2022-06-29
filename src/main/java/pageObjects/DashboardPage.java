@@ -26,6 +26,12 @@ public class DashboardPage {
 	@FindBy(how = How.ID, using = "sales_index")
 	private WebElement clickInvoice;
 	
+	@FindBy(how = How.ID, using="saleorders_index")
+	private WebElement clickSaleOrder;
+	
+	@FindBy(how = How.ID, using = "sales_return_sales")
+	private WebElement clickReturnSales;
+	
 	@FindBy(how = How.ID, using = "quotes_index")
 	private WebElement clickQuotations;
 	
@@ -89,7 +95,17 @@ public class DashboardPage {
 		
 	}
 	
+	public Map<Boolean,String> clickReturnSales() {
+
+		return Elements.CLICK(driver, clickReturnSales);
+		
+	}
 	
+	public Map<Boolean,String> clickSaleOrder() {
+
+		return Elements.CLICK(driver, clickSaleOrder);
+		
+	}
 	
 	
 

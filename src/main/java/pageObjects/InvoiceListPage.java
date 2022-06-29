@@ -1,15 +1,31 @@
 package pageObjects;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import commonMethods.Elements;
 import commonMethods.Validations;
@@ -126,6 +142,156 @@ public class InvoiceListPage {
 	
 	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[@class=' sorting_1']")
 	private List<WebElement> dateSearchResult;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Status')]")
+	private WebElement sortStatusInAsc;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[@class=' sorting_1']//button")
+	private List<WebElement> statusList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Channels')]")
+	private WebElement sortChannels;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[2]")
+	private List<WebElement> channelsList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Channel Order No')]")
+	private WebElement sortChannelOrderNo;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[3]")
+	private List<WebElement> channelOrderNoList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Invoice')]")
+	private WebElement sortInvoices;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[4]")
+	private List<WebElement> invoicesList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Biller')]")
+	private WebElement sortBillers;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[5]")
+	private List<WebElement> billersList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Customer')]")
+	private WebElement sortCustomers;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[6]")
+	private List<WebElement> customersList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Total')]")
+	private WebElement sortTotalAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[7]//div")
+	private List<WebElement> totalAmountList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr//th[contains(text(),'Outstanding')]")
+	private WebElement sortOutstandingAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[8]//div")
+	private List<WebElement> outstandingAmountList;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[@class='active']//th[2]//div//div//a//span[@class='select2-chosen']")
+	private WebElement clickChannelsDropDown;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[2]")
+	private WebElement selectInvoiceSales;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[2]")
+	private List<WebElement> displayedChannel;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[3]")
+	private WebElement selectPOS;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[4]")
+	private WebElement selectEcommerce;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[5]")
+	private WebElement selectWoocommerce;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[6]")
+	private WebElement selectOpencart;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[7]")
+	private WebElement selectShopify;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[9]")
+	private WebElement selectLazada;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li[10]")
+	private WebElement selectShopee;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[3]")
+	private List<WebElement> getInputForChannelOrderNoSearch;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[3]//div//input")
+	private WebElement searchChannelOrderNo;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[3]")
+	private WebElement searchResultForChannelOrderNo;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[4]")
+	private List<WebElement> getInputForInvoice;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[4]//div//input")
+	private WebElement searchInvoice;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[4]")
+	private WebElement searchResultForInvoice;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[5]")
+	private List<WebElement> getInputForBiller;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[5]//div//input")
+	private WebElement searchBiller;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[5]")
+	private WebElement searchResultForBiller;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[6]")
+	private List<WebElement> getInputForCustomer;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[6]//div//input")
+	private WebElement searchCustomer;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[6]")
+	private WebElement searchResultForCustomer;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[7]//div")
+	private List<WebElement> getInputForTotalAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[7]//div//input")
+	private WebElement searchTotalAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[7]//div")
+	private List<WebElement> searchResultForTotalAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[8]//div")
+	private List<WebElement> getInputForOutstandingAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[2]//th[8]//div//input")
+	private WebElement searchOutstandingAmount;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//tbody//tr//td[7]//div")
+	private List<WebElement> searchResultForOutstandingAmount;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='form-group hamberFilter']//ul//li//a//button")
+	private WebElement moreButton;
+	
+	@FindBy(how = How.ID, using="bulk_add_delivery")
+	private WebElement bulkAddToDelivery;
+	
+	@FindBy(how = How.XPATH, using="//table[@id='SLData']//thead//tr[1]//div")
+	private WebElement bulkSelectInvoices;
+	
+	@FindBy(how = How.ID, using="add_delivery")
+	private WebElement addDeliveryButton;
+	
+	@FindBy(how = How.XPATH, using="//ul[@class='dropdown-menu pull-right']//li//a")
+	private List<WebElement> editDelivery;
+	
+	@FindBy(how = How.XPATH, using="//div[@id='sidebar_menu']//ul//li[@class='mm_sales mm_quotes mm_saleorders mm_pos active']//a")
+	private WebElement salesFromSideMenu;
 
 	
 	public Map<Boolean,String> clickNewInvoiceButton() {
@@ -400,6 +566,16 @@ public class InvoiceListPage {
 			Elements.CLICK(driver, paginate);
 		}
 		while(Validations.IFELEMENTPRESENT(paginate));	
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Due")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -424,7 +600,17 @@ public class InvoiceListPage {
 			if(Validations.IFELEMENTPRESENT(paginate))
 			Elements.CLICK(driver, paginate);
 		}
-		while(Validations.IFELEMENTPRESENT(paginate));	
+		while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Paid")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -455,7 +641,17 @@ public class InvoiceListPage {
 			if(Validations.IFELEMENTPRESENT(paginate)) 
 			Elements.CLICK(driver, paginate);
 		}
-		while(Validations.IFELEMENTPRESENT(paginate));	
+		while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Partially Paid")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -480,7 +676,17 @@ public class InvoiceListPage {
 			if(Validations.IFELEMENTPRESENT(paginate)) 
 			Elements.CLICK(driver, paginate);
 		}
-		while(Validations.IFELEMENTPRESENT(paginate));	
+		while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Returned")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -505,7 +711,17 @@ public class InvoiceListPage {
 			if(Validations.IFELEMENTPRESENT(paginate)) 
 			Elements.CLICK(driver, paginate);
 		}
-		while(Validations.IFELEMENTPRESENT(paginate));	
+		while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Cancelled")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -526,6 +742,17 @@ public class InvoiceListPage {
 			Elements.CLICK(driver, paginate);
 		}
 		while(Validations.IFELEMENTPRESENT(paginate));	
+		if(!Validations.IFELEMENTPRESENT(paginate)) {
+			for(int i=0;i<invoiceStatusList.size();i++) {
+				String text = invoiceStatusList.get(i).getText();
+				if(text.equalsIgnoreCase("Cancelled") || text.equalsIgnoreCase("Due") || text.equalsIgnoreCase("Paid") ||
+				text.equalsIgnoreCase("Partially Paid") || text.equalsIgnoreCase("Returned") || text.equalsIgnoreCase("Pending")){ 
+					result = true;
+				} else {
+					return false;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -675,6 +902,1042 @@ public class InvoiceListPage {
 		}
 		return result;
 	}
+	
+	public Map<Boolean,String> clickStatus()	{
+	
+		return Elements.CLICK(driver, sortStatusInAsc);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedList()	{
+		
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : statusList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		}while(Validations.IFELEMENTPRESENT(paginate));
+			if(!Validations.IFELEMENTPRESENT(paginate))
+				for(WebElement element : statusList) {
+					obtainedList.add(element.getText());
+				}
+				System.out.println(obtainedList.size());
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+			for(String s : obtainedList)	{
+				sortedList.add(s);
+			}
+			Collections.sort(sortedList);
+			System.out.println(sortedList.size());
+			return sortedList.equals(obtainedList);
+	}
+	
+	public boolean verifyObtainedAndSortedListinDescOrder()	{
+		
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : statusList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		}while(Validations.IFELEMENTPRESENT(paginate));
+			if(!Validations.IFELEMENTPRESENT(paginate))
+				for(WebElement element : statusList) {
+					obtainedList.add(element.getText());
+				}
+				System.out.println(obtainedList.size());
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+			for(String s : obtainedList)	{
+				sortedList.add(s);
+			}
+			Collections.sort(sortedList);
+			Collections.reverse(sortedList);
+			System.out.println("Desc : " +sortedList.size());
+			return sortedList.equals(obtainedList);
+	}
+	
+	public Map<Boolean,String> clickChannels()	{
+		
+		return Elements.CLICK(driver, sortChannels);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedChannels() throws Exception	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : channelsList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : channelsList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList.size());
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		System.out.println("Sorted : "+sortedList.size());
+		if(sortedList.equals(obtainedList)) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
+	public boolean verifyObtainedAndSortedChannelsInDescOrder()	{
+		
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : channelsList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : channelsList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList.size());
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList.size());
+		return sortedList.equals(obtainedList);
+		
+	}
+	
+	public Map<Boolean,String> clickChannelOrderNo()	{
+		
+		return Elements.CLICK(driver, sortChannelOrderNo);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedChannelOrderNo() throws Exception	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : channelOrderNoList) {
+				if(element.getText().equalsIgnoreCase("N.A")) {
+					obtainedList.add("#0");
+				} else {
+					obtainedList.add(element.getText());
+				}
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : channelOrderNoList) {
+				if(element.getText().equalsIgnoreCase("N.A")) {
+					obtainedList.add("#0");
+				} else {
+					obtainedList.add(element.getText());
+				}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);			
+	}
+	
+	public boolean verifyObtainedAndSortedChannelOrderNoInDescOrder()	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : channelOrderNoList) {
+				if(element.getText().equalsIgnoreCase("N.A")) {
+					obtainedList.add("#0");
+				} else {
+					obtainedList.add(element.getText());
+				}
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : channelOrderNoList) {
+				if(element.getText().equalsIgnoreCase("N.A")) {
+					obtainedList.add("#0");
+				} else {
+					obtainedList.add(element.getText());
+				}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);	
+	}
+	
+	public Map<Boolean,String> clickInvoices()	{
+		
+		return Elements.CLICK(driver, sortInvoices);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedInvoices() throws ParseException {
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : invoicesList) {
+				String textDate = element.getText().substring(element.getText().indexOf('\n'));
+				String tDate = textDate.trim();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				Date parsedDate = sdf.parse(tDate);
+				SimpleDateFormat print = new SimpleDateFormat("yyyy-MM-dd");
+				String pd = print.format(parsedDate);
+					obtainedList.add(pd);
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+			if(!Validations.IFELEMENTPRESENT(paginate)) {
+				for(WebElement element : invoicesList) {
+					String textDate = element.getText().substring(element.getText().indexOf('\n'));
+					String tDate = textDate.trim();
+					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+					Date parsedDate = sdf.parse(tDate);
+					SimpleDateFormat print = new SimpleDateFormat("yyyy-MM-dd");
+					String pd = print.format(parsedDate);
+						obtainedList.add(pd);
+			}
+			}
+			System.out.println("Obtained : "+obtainedList);
+			
+			ArrayList<String> sortedList = new ArrayList<>();
+			for(String s : obtainedList)	{
+				sortedList.add(s);
+			}
+			Collections.sort(sortedList);
+			System.out.println("Sorted : "+sortedList);
+			return sortedList.equals(obtainedList);	
+	}
+	
+	public boolean verifyObtainedAndSortedInvoicesInDescOrder() throws ParseException	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : invoicesList) {
+				String textDate = element.getText().substring(element.getText().indexOf('\n'));
+				String tDate = textDate.trim();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				Date parsedDate = sdf.parse(tDate);
+				SimpleDateFormat print = new SimpleDateFormat("yyyy-MM-dd");
+				String pd = print.format(parsedDate);
+					obtainedList.add(pd);
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+			if(!Validations.IFELEMENTPRESENT(paginate)) {
+				for(WebElement element : invoicesList) {
+					String textDate = element.getText().substring(element.getText().indexOf('\n'));
+					String tDate = textDate.trim();
+					SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+					Date parsedDate = sdf.parse(tDate);
+					SimpleDateFormat print = new SimpleDateFormat("yyyy-MM-dd");
+					String pd = print.format(parsedDate);
+						obtainedList.add(pd);
+			}
+			}
+			System.out.println("Obtained : "+obtainedList);
+			
+			ArrayList<String> sortedList = new ArrayList<>();
+			for(String s : obtainedList)	{
+				sortedList.add(s);
+			}
+			Collections.sort(sortedList);
+			Collections.reverse(sortedList);
+			System.out.println("Sorted : "+sortedList);
+			return sortedList.equals(obtainedList);
+	}
+	
+	public Map<Boolean,String> clickBillers()	{
+		
+		return Elements.CLICK(driver, sortBillers);
+	
+	}	
+	
+	public boolean verifyObtainedAndSortedBillers()	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : billersList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : billersList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public boolean verifyObtainedAndSortedBillersInDescOrder()	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : billersList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : billersList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);	
+	}
+	
+	public Map<Boolean,String> clickCustomers()	{
+		
+		return Elements.CLICK(driver, sortCustomers);
+	
+	}	
+	
+	public boolean verifyObtainedAndSortedCustomers()	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : customersList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : customersList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public boolean verifyObtainedAndSortedCustomersInDescOrder()	{
+		ArrayList<String> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : customersList) {
+				obtainedList.add(element.getText());
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : customersList) {
+				obtainedList.add(element.getText());
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<String> sortedList = new ArrayList<>();
+		for(String s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList, String.CASE_INSENSITIVE_ORDER);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public Map<Boolean,String> clickTotal()	{
+		
+		return Elements.CLICK(driver, sortTotalAmount);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedTotalAmount()	{
+		ArrayList<Double> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : totalAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}	
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : totalAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<Double> sortedList = new ArrayList<>();
+		for(Double s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public boolean verifyObtainedAndSortedTotalAmountInDescOrder()	{
+		ArrayList<Double> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : totalAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}	
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : totalAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<Double> sortedList = new ArrayList<>();
+		for(Double s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public Map<Boolean,String> clickOutstanding()	{
+		
+		return Elements.CLICK(driver, sortOutstandingAmount);
+	
+	}
+	
+	public boolean verifyObtainedAndSortedOutstandingAmount()	{
+		ArrayList<Double> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : outstandingAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}	
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : outstandingAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<Double> sortedList = new ArrayList<>();
+		for(Double s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public boolean verifyObtainedAndSortedOutstandingAmountInDescOrder()	{
+		ArrayList<Double> obtainedList = new ArrayList<>();
+		
+		do{
+			for(WebElement element : outstandingAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}	
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))
+				Elements.CLICK(driver, paginate);	
+		  }while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))
+			for(WebElement element : outstandingAmountList) {
+				if(element.getText().contains("("))
+					continue;
+				String a = element.getText().substring(1).trim();
+				if(a.contains(",")) {
+					obtainedList.add(Double.parseDouble(a.replaceAll(",", "")));				
+			} else {
+				obtainedList.add(Double.parseDouble(a));
+			}
+			}
+		System.out.println("Obtained : "+obtainedList);
+		
+		ArrayList<Double> sortedList = new ArrayList<>();
+		for(Double s : obtainedList)	{
+			sortedList.add(s);
+		}
+		 Collections.sort(sortedList);
+		 Collections.reverse(sortedList);
+		System.out.println("Sorted : "+sortedList);
+		return sortedList.equals(obtainedList);
+	}
+	
+	public Map<Boolean,String> clickChannelDropdown()	{
+		
+		return Elements.CLICK(driver, clickChannelsDropDown);
+		
+	}
+	
+	public Map<Boolean,String> selectInvoiceSales()	{
+		
+		return Elements.CLICK(driver, selectInvoiceSales);
+		
+	}
+	
+	public boolean filteredChannelIsInvoiceSale()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Invoice Sales"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Invoice Sales"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectPOS()	{
+		
+		return Elements.CLICK(driver, selectPOS);
+		
+	}
+	
+	public boolean filteredChannelIsPOS()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("POS"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("POS"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectEcommerce()	{
+		
+		return Elements.CLICK(driver, selectEcommerce);
+		
+	}
+	
+	public boolean filteredChannelIsEcommerce()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("eCommerce"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("eCommerce"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectWoocommerce()	{
+		
+		return Elements.CLICK(driver, selectWoocommerce);
+		
+	}
+	
+	public boolean filteredChannelIsWoocommerce()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("WooCommerce"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("WooCommerce"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectOpencart()	{
+		
+		return Elements.CLICK(driver, selectOpencart);
+		
+	}
+	
+	public boolean filteredChannelIsOpencart()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Opencart"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Opencart"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectShopify()	{
+		
+		return Elements.CLICK(driver, selectShopify);
+		
+	}
+	
+	public boolean filteredChannelIsShopify()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Shopify"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Shopify"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectLazada()	{
+		
+		return Elements.CLICK(driver, selectLazada);
+		
+	}
+	
+	public boolean filteredChannelIsLazada()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Lazada"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Lazada"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> selectShopee()	{
+		
+		return Elements.CLICK(driver, selectShopee);
+		
+	}
+	
+	public boolean filteredChannelIsShopee()	{
+		boolean result = false;
+		do{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Shopee"))	
+					result = true;
+				else 
+					return false;
+			}
+			if(Validations.IFELEMENTPRESENT(paginate))	
+				Elements.CLICK(driver, paginate);
+		}while(Validations.IFELEMENTPRESENT(paginate));
+		if(!Validations.IFELEMENTPRESENT(paginate))	{
+			for(WebElement element : displayedChannel){
+				if(element.getText().equalsIgnoreCase("Shopee"))	
+					result = true;
+				else 
+					return false;
+			}
+		}
+		return result;
+	}
+	
+	public String getInputforChannelOrderNoSearch()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForChannelOrderNoSearch.size();i++)	{
+			if(i==0) {
+				WebElement element = getInputForChannelOrderNoSearch.get(i);
+				result = element.getText();
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> searchChannelOrderNo()	{
+		
+		return Elements.ENTERVALUE(driver, searchChannelOrderNo, getInputforChannelOrderNoSearch());
+		
+	}
+	
+	public boolean searchResultForChannelOrderNo()	{
+		
+		if(searchResultForChannelOrderNo.getText().equalsIgnoreCase(getInputforChannelOrderNoSearch()))	
+			return true;
+		else
+			return false;
+		
+	}
+	
+	public String getInputforInvoice()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForInvoice.size();i++)	{
+			if(i==0) {
+				WebElement element = getInputForInvoice.get(i);
+				result = element.getText().substring(0, 14);
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> searchInvoice()	{
+		
+		return Elements.ENTERVALUE(driver, searchInvoice, getInputforInvoice());
+		
+	}
+	
+	public boolean searchResultForInvoice()	{
+		if(searchResultForInvoice.getText().substring(0, 14).equalsIgnoreCase(getInputforInvoice()))	
+			return true;
+		else
+			return false;	
+	}
+	
+	public String getInputforBiller()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForBiller.size();i++)	{
+			if(i==0) {
+				WebElement element = getInputForBiller.get(i);
+				result = element.getText();
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> searchBiller()	{
+		
+		return Elements.ENTERVALUE(driver, searchBiller, getInputforBiller());
+		
+	}
+	
+	public boolean searchResultForBiller()	{
+		if(searchResultForBiller.getText().equalsIgnoreCase(getInputforBiller()))	
+			return true;
+		else
+			return false;	
+	}
+	
+	public String getInputforCustomer()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForCustomer.size();i++)	{
+			if(i==0) {
+				WebElement element = getInputForCustomer.get(i);
+				result = element.getText();
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Map<Boolean,String> searchCustomer()	{
+		
+		return Elements.ENTERVALUE(driver, searchCustomer, getInputforCustomer());
+		
+	}
+	
+	public boolean searchResultForCustomer()	{
+		if(searchResultForCustomer.getText().equalsIgnoreCase(getInputforCustomer()))	
+			return true;
+		else
+			return false;	
+	}
+	
+	public String getInputforTotal()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForTotalAmount.size();i++)	{
+			if(getInputForTotalAmount.get(i).getText().contains("("))
+					continue;
+			else {
+				WebElement element = getInputForTotalAmount.get(i);
+				result = element.getText();
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Double totalAmount()	{
+
+		return Double.parseDouble(getInputforTotal().substring(2));
+		
+	}
+	
+	public Map<Boolean,String> searchTotal()	{
+		
+		return Elements.ENTERVALUE(driver, searchTotalAmount, Double.toString(totalAmount()));
+		
+	}
+	
+	public boolean searchResultForTotalAmount()	{
+		boolean result = false;
+		
+		for(int i=0;i<searchResultForTotalAmount.size();i++) {
+			if(searchResultForTotalAmount.get(i).getText().contains("("))
+				continue;
+			else {
+				searchResultForTotalAmount.get(i).getText().equalsIgnoreCase(Double.toString(totalAmount()));
+				result = true;
+			}
+		}
+		return result;	
+	}
+	
+	public String getInputforOutstanding()	{
+		String result = null;
+		
+		for(int i=0;i<getInputForOutstandingAmount.size();i++)	{
+			if(getInputForOutstandingAmount.get(i).getText().contains("("))
+					continue;
+			else {
+				WebElement element = getInputForOutstandingAmount.get(i);
+				result = element.getText();
+				break;
+			}
+		}
+		return result;
+	}
+	
+	public Double outstandingAmount()	{
+
+		return Double.parseDouble(getInputforOutstanding().substring(2));
+		
+	}
+	
+	public Map<Boolean,String> searchOutstanding()	{
+		
+		return Elements.ENTERVALUE(driver, searchOutstandingAmount, Double.toString(outstandingAmount()));
+		
+	}
+	
+	public boolean searchResultForOutstandingAmount()	{
+		boolean result = false;
+		
+		for(int i=0;i<searchResultForOutstandingAmount.size();i++) {
+			if(searchResultForTotalAmount.get(i).getText().contains("("))
+				continue;
+			else {
+				searchResultForOutstandingAmount.get(i).getText().equalsIgnoreCase(Double.toString(outstandingAmount()));
+				result = true;
+			}
+		}
+		return result;	
+	}
+	
+	public Map<Boolean,String> clickMoreButton()	{
+		
+		return Elements.CLICK(driver, moreButton);
+		
+	}
+	
+	public Map<Boolean,String> clickBulkAddToDelivery()	{
+		
+		return Elements.CLICK(driver, bulkAddToDelivery);
+		
+	}
+	
+	public boolean chooseCheckBox()	{
+	
+		return Validations.ISSELECTED(bulkSelectInvoices);
+		
+	}
+	
+	public Map<Boolean,String> clickAddDeliveryButton()	{
+		
+		return Elements.CLICK(driver, addDeliveryButton);
+		
+	}
+	
+	public Map<Boolean,String> clickEditDelivery()	{
+		Map<Boolean,String> editDel = null;
+		
+		for(int i=0;i<editDelivery.size();i++) {
+			if(i==12) {
+				WebElement element = editDelivery.get(i);
+				editDel = Elements.CLICK(driver, element);
+				break;
+			}
+		}
+		return editDel;	
+	}
+	
+	public void refreshPage()	{
+		driver.navigate().refresh();
+	}
+	
+	public Map<Boolean,String> clickSalesInSideMenu()	{
+		
+		return Elements.CLICK(driver, salesFromSideMenu);
+		
+	}
+	
 	
 	
 }

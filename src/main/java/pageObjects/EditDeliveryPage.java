@@ -37,6 +37,16 @@ public class EditDeliveryPage {
 	@FindBy(how = How.XPATH, using="//div[@id='select2-drop']//ul//li")
 	private List<WebElement> chooseStatus;
 	
+	@FindBy(how = How.NAME, using="edit_delivery")
+	private WebElement editDeliveryButton;
+	
+	@FindBy(how = How.XPATH, using="//div[@class='toast-message']//p[1]")
+	private WebElement alertMsg1;
+	
+	@FindBy(how = How.XPATH, using="//ul[@class='breadcrumb']//li[3]")
+	private WebElement breadCrumb;
+	
+	
 	public void scrollToDeliveryStatus()	{
 		Scrolling.SCROLLINTOVIEW(driver, saveDeliveryButton);
 	}
@@ -138,6 +148,22 @@ public class EditDeliveryPage {
 		return Delivered;
 	}
 	
+	public Map<Boolean,String> clickEditDeliveryButton()	{
+		
+		return Elements.CLICK(driver, editDeliveryButton);
+		
+	}
+	
+	public String alertMessage1()	{
+		String alertMess1 = alertMsg1.getText();
+		return alertMess1;
+	}
+	
+	public String verifyEditPage() {
+		
+		return breadCrumb.getText();
+		
+	}
 	
 
 }

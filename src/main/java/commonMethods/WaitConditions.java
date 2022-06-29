@@ -1,5 +1,7 @@
 package commonMethods;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +32,16 @@ public class WaitConditions {
 			throw(e);
 		} 
 		return element;
+	}
+	
+	public static List<WebElement> WAITFORALLELEMENTS(WebDriver driver, List<WebElement> elements)	{
+		try {
+			long WaitTime = FileReaderManager.getInstance().getConfigReader().getObjectWait();
+			elements = new WebDriverWait(driver, WaitTime).until(ExpectedConditions.visibilityOfAllElements(elements));
+		} catch (Exception e) {
+			throw(e);
+		}
+		return elements;
 	}
 
 }

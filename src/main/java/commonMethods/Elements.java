@@ -29,7 +29,7 @@ public class Elements {
 		Map<Boolean,String> kywdResult = new HashMap<>();
 		try {
 			Validations.VERIFYOBJECT(driver, by);
-			
+			driver.findElement(by).click();
 			kywdResult.put(true, "Element Located");
 		} catch (Exception e) {
 			kywdResult.put(false, e.toString());
@@ -126,6 +126,8 @@ public class Elements {
 		}
 		return kywdResult;
 	}
+	
+	
 	
 
 }

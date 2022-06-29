@@ -5,15 +5,20 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.AddDeliveryPage;
 import pageObjects.AddPaymentPage;
 import pageObjects.CreateQuotationPage;
+import pageObjects.CreateSaleOrderPage;
 import pageObjects.DashboardPage;
 import pageObjects.DeliveryListPage;
 import pageObjects.EditDeliveryPage;
 import pageObjects.EditInvoicePage;
+import pageObjects.EditSaleOrderPage;
 import pageObjects.EmailInvoicePage;
 import pageObjects.InvoiceCreationPage;
 import pageObjects.InvoiceListPage;
 import pageObjects.LoginPage;
 import pageObjects.QuotationListPage;
+import pageObjects.ReturnInvoiceSaleListPage;
+import pageObjects.ReturnInvoiceSalePage;
+import pageObjects.SaleOrderListPage;
 import pageObjects.ViewPaymentPage;
 
 public class PageObjectManager {
@@ -32,6 +37,11 @@ public class PageObjectManager {
 	private CreateQuotationPage createQuotation;
 	private QuotationListPage quotation;
 	private EmailInvoicePage emailInvoice;
+	private ReturnInvoiceSalePage invoiceReturns;
+	private ReturnInvoiceSaleListPage returnInvoiceList;
+	private CreateSaleOrderPage saleOrderCreation;
+	private SaleOrderListPage saleOrderList;
+	private EditSaleOrderPage editSale;
 	
 	public PageObjectManager(WebDriver driver) {
 		this.driver = driver;
@@ -87,6 +97,26 @@ public class PageObjectManager {
 	
 	public EmailInvoicePage getEmailInvoicePage() {
 		return (emailInvoice == null) ? emailInvoice = new EmailInvoicePage(driver) : emailInvoice;
+	}
+	
+	public ReturnInvoiceSalePage getReturnInvoiceSalePage() {
+		return (invoiceReturns == null) ? invoiceReturns = new ReturnInvoiceSalePage(driver) : invoiceReturns;
+	}
+	
+	public ReturnInvoiceSaleListPage getReturnInvoiceSaleListPage() {
+		return (returnInvoiceList == null) ? returnInvoiceList = new ReturnInvoiceSaleListPage(driver) : returnInvoiceList;
+	}
+	
+	public CreateSaleOrderPage getSaleOrderCreationPage() {
+		return (saleOrderCreation == null) ? saleOrderCreation = new CreateSaleOrderPage(driver) : saleOrderCreation;
+	}
+	
+	public SaleOrderListPage getSaleOrderListPage() {
+		return (saleOrderList == null) ? saleOrderList = new SaleOrderListPage(driver) : saleOrderList;
+	}
+	
+	public EditSaleOrderPage getEditSaleOrderPage() {
+		return (editSale == null) ? editSale = new EditSaleOrderPage(driver) : editSale;
 	}
 
 }

@@ -32,8 +32,8 @@ public class CreateQuotationPageSteps {
 	public void user_selects_items() {
 	    Map<Boolean,String> status = createQuotation.searchItem();
 	    Assert.assertTrue(status.get(false), status.containsKey(true));
-	    Map<Boolean,String> status1 = createQuotation.selectItem();
-	    Assert.assertTrue(status1.get(false), status1.containsKey(true));
+	   // Map<Boolean,String> status1 = createQuotation.selectItem();
+	    //Assert.assertTrue(status1.get(false), status1.containsKey(true));
 	}
 	
 	@When("User scrolls down to save quote button")
